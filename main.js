@@ -1,41 +1,16 @@
-// Harm and status
+// Harm and status DOM elements
 
-const damageBar = document.getElementById('damage-bar')
-const statusText = document.getElementById('status-text')
+const harmBar = document.getElementById('harm-bar')
+const harmStatusText = document.getElementById('harm-status-text')
 const harmText = document.getElementById('harm-text')
-damageBarArray = []
+
+harmBarArray = []
 let currentHarm = 4
-
-// Draw 8 harm boxes 
-
-function createDamageBar() {
-
-    for(let i=0; i < 8; i++) {
-        const squares = document.createElement('div')
-        squares.classList.add('square')
-        damageBar.appendChild(squares)
-        damageBarArray.push(squares)
-    }
-
-}
-
-createDamageBar()
-
-// Display red boxes for number of harm
-
-function drawHarm() {
-    for(let i=0; i<currentHarm; i++) {
-        damageBarArray[i].classList.add('harm')     
-    }
-    console.log()
-}
-
-drawHarm() 
 
 // Display number of harm out of 8
 
 function displayHarmText() {
-    harmText.innerHTML = currentHarm + '/8'
+    harmText.innerHTML = 'Harm: ' + currentHarm + '/8'
 }
 
 displayHarmText()
@@ -44,27 +19,92 @@ displayHarmText()
 
 if (currentHarm < 3) {
     
-    statusText.innerHTML = ''
+    harmStatusText.innerHTML = ''
 
 } else if (currentHarm > 3) {
 
-    statusText.innerHTML = 'Unstable'
+    harmStatusText.innerHTML = 'Unstable'
 
 } else if (currentHarm > 6) {
-    statusText.innerHTML = "Almost Dead?"
+    harmStatusText.innerHTML = 'Almost Dead?'
 }
 
-// Dice and results
+// Dice and results DOM elements
 
 const rollButton = document.getElementById('roll-btn')
 const rollMath = document.getElementById('roll-math')
 const rollResults = document.getElementById('roll-results')
 
-// Luck
+// Luck DOM elements and variables
 
 const luckBar = document.getElementById('luck-bar')
+const luckText = document.getElementById('luck-text')
+const luckStatusText = document.getElementById('luck-status-text')
 
 luckBarArray = []
+let usedLuck = 1
+
+// Display used luck out of 7
+
+function displayLuckText() {
+    luckText.innerHTML = 'Used Luck: ' + usedLuck + '/7'
+}
+
+displayLuckText()
+
+// Experience DOM elements and variables
+
+const experienceBar = document.getElementById('experience-bar')
+const experienceText = document.getElementById('experience-text')
+const experienceStatusText = document.getElementById('experience-status-text')
+
+experienceBarArray = []
+let experience = 2
+let level = 3
+
+// Display experience out of 5 status
+
+function displayExperienceText() {
+    experienceText.innerHTML = 'Experience: ' + experience + '/5'
+    experienceStatusText.innerHTML = 'Level: ' + level
+}
+
+displayExperienceText()
+
+// Function to draw the harm, luck, and experience bars
+
+function drawBar(length, barName, barArray, barFill, barClassName, fillClassName, barClassName2) {
+
+// draw the bar
+
+    for (let i=0; i<length; i++) {
+        const squares = document.createElement('div')
+        squares.classList.add(barClassName, barClassName2)
+        barName.appendChild(squares)
+        barArray.push(squares)
+    }
+    
+// fill the boxes
+
+    for (let i=0; i<barFill; i++) {
+        barArray[i].classList.add(fillClassName)
+    }
+
+}
+
+// Create harm bar
+
+drawBar(8, harmBar, harmBarArray, currentHarm, 'square', 'harm')
+
+// Create luck bar
+
+drawBar(7, luckBar, luckBarArray, usedLuck, 'square', 'usedLuck', 'green')
+
+// Create experience bar
+
+drawBar(5, experienceBar, experienceBarArray, experience, 'square', 'experience')
+
+
 
 // Ratings variables/DOM elements
 

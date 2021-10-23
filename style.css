@@ -13,8 +13,20 @@ header {
 
 }
 
+.green {
+    background-color: lightgreen;
+}
+
  .harm {
      background-color: red;
+ }
+ 
+ .usedLuck {
+     background-color: black;
+ }
+
+ .experience {
+     background-color: yellow;
  }
 
 .grid-container {
@@ -29,8 +41,8 @@ header {
     grid-template-areas: 
         'header header header'
         'harm luck experience'
-        'ratings dice dice'
         'ratings basic basic'
+        'dice basic basic'
         'abilities log log'
         'abilities log log'
         'inventory log log';
