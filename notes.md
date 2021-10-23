@@ -1,0 +1,2 @@
+- for the inventory, use the Chrome extension methods of plus and minus and add/delete items
+- truly randomize the dice rolls, rather than using Math.random

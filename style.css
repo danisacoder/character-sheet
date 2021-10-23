@@ -1,0 +1,102 @@
+header {
+    text-align: center;
+    border: 1px solid red;
+    grid-area: header;
+}
+
+.square {
+    border: 1px solid black;
+    background-color: white;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+
+}
+
+ .harm {
+     background-color: red;
+ }
+
+.grid-container {
+    border: 1px solid darkblue;
+    margin: 75px 50px 50px;
+    padding: 30px;
+    text-align: center;
+    /* grid layout */
+    display: grid;
+    grid-template-columns: auto auto;
+    /* grid-template-rows: 100px 300px;  */
+    grid-template-areas: 
+        'header header header'
+        'harm luck experience'
+        'ratings dice dice'
+        'ratings basic basic'
+        'abilities log log'
+        'abilities log log'
+        'inventory log log';
+    grid-gap: 10px;
+    background-color: lightskyblue;
+}
+
+section {
+    border: 1px solid blue;
+    background: lightgray;
+}
+
+/* grid stuff */
+
+.ratings-section {
+    grid-area: ratings;
+    /* display: flex; */
+}
+
+.harm-section {
+    grid-area: harm;
+}
+
+.status-section {
+    grid-area: status;
+}
+
+.abilities-section {
+    grid-area: abilities;
+}
+
+.inventory-section {
+    grid-area: inventory;
+}
+
+.dice-section {
+    grid-area: dice;
+}
+
+.log-section {
+    grid-area: log;
+}
+
+.basic-move-section {
+    grid-area: basic;
+}
+
+.luck-section {
+    grid-area: luck;
+}
+
+.experience-section {
+    grid-area: experience;
+}
+
+/* Making the event log text */
+
+.event-log {
+    color: gray;
+}
+
+/* Turning off bullets in event log */
+
+#event-log {
+    list-style-type: none;
+    text-align: center;
+}
+
+/* Still not centered... */

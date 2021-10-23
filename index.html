@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Character Sheet</title>
+</head>
+<body>
+    <nav></nav>
+    <div class="grid-container">
+        <header>
+            <h1>Character Sheet</h1>
+        </header>
+        <section class="harm-section">
+            <h2>Harm</h2>
+            <h3 id="harm-text"></h3>
+            <div id="damage-bar"></div>
+            <h3 id="status-text"></h3>
+        </section>
+        <section class="ratings-section">
+            <h2>Ratings</h2>
+                <h3 id="charm">Charm: </h3>
+                <h3 id="cool">Cool: </h3>
+                <h3 id="sharp">Sharp: </h3>
+                <h3 id="tough">Tough: </h3>
+                <h3 id="weird">Weird: </h3>
+        </section>  
+        <section class="abilities-section">
+            <h2>Abilities</h2>
+        </section>
+        <section class="inventory-section">
+            <h2>Inventory</h2>
+        </section>
+        <section class="dice-section">
+            <h2>Dice Roller</h2>
+            <button id="roll-btn">Roll 2d6</button>
+            <h3 id="roll-math"></h3>
+            <h2 id="roll-results"></h2>
+        </section>
+        <section class="basic-move-section">
+            <h2>Basic Moves</h2>
+                <button id="kick-some-ass">Kick Some Ass</button>
+                <button id="act-under-pressure">Act Under Pressure</button><br>
+                <button id="help-out">Help Out</button>
+                <button id="investigate-a-mystery">Investigate A Mystery</button><br>
+                <button id="manipulate-someone">Manipulate Someone</button>
+                <button id="protect-someone">Protect Someone</button><br>
+                <button id="read-a-bad-situation">Read A Bad Situation</button>
+                <h3 id="basic-move-math"></h3>
+                <h2 id="basic-move-results"></h2>
+        </section>
+        <section class="log-section">
+            <h2>Event Log</h2>
+            <button id="undo">Undo</button>
+            <ul id="event-log"></ul>
+        </section>
+        <section class="luck-section">
+            <h2>Luck</h2>
+        </section>
+        <section class="experience-section">
+            <h2>Experience</h2>
+        </section>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
