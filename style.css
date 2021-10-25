@@ -31,7 +31,7 @@ header {
 
 .grid-container {
     border: 1px solid darkblue;
-    margin: 75px 50px 50px;
+    margin: 50px 50px 50px;
     padding: 30px;
     text-align: center;
     /* grid layout */
@@ -42,7 +42,7 @@ header {
         'header header header'
         'harm luck experience'
         'ratings basic basic'
-        'dice basic basic'
+        'dice log log'
         'abilities log log'
         'abilities log log'
         'inventory log log';

@@ -4,7 +4,7 @@ const harmBar = document.getElementById('harm-bar')
 const harmStatusText = document.getElementById('harm-status-text')
 const harmText = document.getElementById('harm-text')
 
-harmBarArray = []
+const harmBarArray = []
 let currentHarm = 4
 
 // Display number of harm out of 8
@@ -23,7 +23,7 @@ if (currentHarm < 3) {
 
 } else if (currentHarm > 3) {
 
-    harmStatusText.innerHTML = 'Unstable'
+    harmStatusText.innerHTML = 'Status: Unstable'
 
 } else if (currentHarm > 6) {
     harmStatusText.innerHTML = 'Almost Dead?'
@@ -41,7 +41,7 @@ const luckBar = document.getElementById('luck-bar')
 const luckText = document.getElementById('luck-text')
 const luckStatusText = document.getElementById('luck-status-text')
 
-luckBarArray = []
+const luckBarArray = []
 let usedLuck = 1
 
 // Display used luck out of 7
@@ -58,7 +58,7 @@ const experienceBar = document.getElementById('experience-bar')
 const experienceText = document.getElementById('experience-text')
 const experienceStatusText = document.getElementById('experience-status-text')
 
-experienceBarArray = []
+const experienceBarArray = []
 let experience = 2
 let level = 3
 
@@ -104,8 +104,6 @@ drawBar(7, luckBar, luckBarArray, usedLuck, 'square', 'usedLuck', 'green')
 
 drawBar(5, experienceBar, experienceBarArray, experience, 'square', 'experience')
 
-
-
 // Ratings variables/DOM elements
 
 let charm = -1
@@ -122,7 +120,7 @@ const weirdText = document.getElementById('weird')
 
 // Show the ratings on the page
 
-function displayStatsText() {
+function displayRatingsText() {
 
     charmText.textContent = `Charm: ${charm}`
     coolText.textContent = `Cool: ${cool}`
@@ -132,19 +130,19 @@ function displayStatsText() {
     
 }
 
-displayStatsText()
+displayRatingsText()
 
 // Basic 2d6 dice roller
 
-function diceRoller() {
+function dieRoller() {
     const randomNum = (Math.floor(Math.random() * 6) + 1)
     // console.log(randomNum)
     return randomNum
 }
 
 rollButton.addEventListener("click", function() {
-    const die1 = diceRoller()
-    const die2 = diceRoller()
+    const die1 = dieRoller()
+    const die2 = dieRoller()
     const dieSum = die1 + die2
 
     rollMath.innerHTML = `${die1} + ${die2}`
@@ -164,12 +162,12 @@ const actUnderPressureButton = document.getElementById('act-under-pressure')
 
 // Basic move dice roll functions
 
-const basicMoveArray = []
+let basicMoveArray = []
 
 
 function basicRoll(type) {
-    const die1 = diceRoller()
-    const die2 = diceRoller()    
+    const die1 = dieRoller()
+    const die2 = dieRoller()    
     const diceSum = die1 + die2
     const addType = diceSum + (type)
 
@@ -177,22 +175,38 @@ function basicRoll(type) {
 }
 
 kickSomeAssButton.addEventListener("click", function() {
+    // put the latest string in the roll history array
     basicMoveArray.push(basicRoll(tough))
-        let lastRoll = basicMoveArray.length - 1
-        basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough})` 
         
-        basicMoveResults.innerHTML = `${basicMoveArray[lastRoll][3]}`
+    // declare a variable for the most recent entry (probably an easier way to do this...)
+    let lastRoll = basicMoveArray.length - 1
 
-        eventLogArray.push(basicMoveMath.innerHTML)
-        console.log(eventLogArray)
-        
-        updateLogText()
+    // render the move math text
+    basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough})` 
+
+    // render the results text (large and in charge)
+    basicMoveResults.innerHTML = `${basicMoveArray[lastRoll][3]}`
+
+    eventLogArray.push(`Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough}) = ${basicMoveArray[lastRoll][3]}`)
+    
+    console.log(eventLogArray)
+
+    updateLogText(eventLogArray[lastRoll])
 })
 
 
-// Preset roll undo button
+// Basic Moves undo button
 
-const undoButton = document.getElementById('undo')
+const basicMoveUndoButton = document.getElementById('basic-move-undo-button')
+
+basicMoveUndoButton.addEventListener("click", function(){
+    // let previousRoll = basicMoveArray.length - 2
+
+    basicMoveArray.pop
+    eventLogArray.pop
+    eventLogArray.forEach(updateLogText)
+    
+})
 
 // Event log
 
