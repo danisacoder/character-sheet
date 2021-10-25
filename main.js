@@ -174,24 +174,31 @@ function basicRoll(type) {
     return [die1, die2, diceSum, addType]
 }
 
-kickSomeAssButton.addEventListener("click", function() {
-    // put the latest string in the roll history array
-    basicMoveArray.push(basicRoll(tough))
-        
+function renderBasicMoves() {
+            
     // declare a variable for the most recent entry (probably an easier way to do this...)
     let lastRoll = basicMoveArray.length - 1
-
+    
     // render the move math text
     basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough})` 
 
     // render the results text (large and in charge)
     basicMoveResults.innerHTML = `${basicMoveArray[lastRoll][3]}`
 
+    // push the text into an array entry
     eventLogArray.push(`Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough}) = ${basicMoveArray[lastRoll][3]}`)
-    
+
     console.log(eventLogArray)
 
     updateLogText(eventLogArray[lastRoll])
+
+}
+
+kickSomeAssButton.addEventListener("click", function() {
+    // put the latest string in the roll history array
+    basicMoveArray.push(basicRoll(tough))
+    
+    renderBasicMoves()
 })
 
 
@@ -202,8 +209,9 @@ const basicMoveUndoButton = document.getElementById('basic-move-undo-button')
 basicMoveUndoButton.addEventListener("click", function(){
     // let previousRoll = basicMoveArray.length - 2
 
-    basicMoveArray.pop
-    eventLogArray.pop
+    basicMoveArray.pop()
+    eventLogArray.pop()
+    renderBasicMoves()
     eventLogArray.forEach(updateLogText)
     
 })
