@@ -10,7 +10,7 @@ let currentHarm = 4
 // Display number of harm out of 8
 
 function displayHarmText() {
-    harmText.innerHTML = 'Harm: ' + currentHarm + '/8'
+    harmText.innerHTML = 'Harm: ' + currentHarm + '/8 🤕'
 }
 
 displayHarmText()
@@ -47,7 +47,7 @@ let usedLuck = 1
 // Display used luck out of 7
 
 function displayLuckText() {
-    luckText.innerHTML = 'Used Luck: ' + usedLuck + '/7'
+    luckText.innerHTML = 'Used Luck: ' + usedLuck + '/7 🍀'
 }
 
 displayLuckText()
@@ -65,7 +65,7 @@ let level = 3
 // Display experience out of 5 status
 
 function displayExperienceText() {
-    experienceText.innerHTML = 'Experience: ' + experience + '/5'
+    experienceText.innerHTML = 'Experience: ' + experience + '/5 ⚡'
     experienceStatusText.innerHTML = 'Level: ' + level
 }
 
@@ -175,24 +175,49 @@ function basicRoll(type) {
 }
 
 function renderBasicMoves() {
-            
-    // declare a variable for the most recent entry (probably an easier way to do this...)
-    // let lastRoll = basicMoveArray[0]
+
+    if (basicMoveArray.length === 0) {
+        
+        // blank the page text out
+        basicMoveMath.innerHTML = ""
+        basicMoveResults.innerHTML = ""
+
+        // you also need to blank out the event log text here...
+
+    } else {
     
-    // render the move math text
-    basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough})` 
+        // render the move math text
+        basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough})` 
 
-    // render the results text (large and in charge)
-    basicMoveResults.innerHTML = `${basicMoveArray[0][3]}`
+        // render the results text (large and in charge)
+        basicMoveResults.innerHTML = `${basicMoveArray[0][3]}`
 
-    // push the text into an array entry for later (in case we want to revert, for example)
-    eventLogArray.unshift(`Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough}) = ${basicMoveArray[0][3]}`)
+        console.log(basicMoveArray)
 
-    // console.log(eventLogArray) 
+        // push the text into an array entry for later (in case we want to revert, for example)
+        eventLogArray.unshift(`Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough}) = ${basicMoveArray[0][3]}`)
 
-    updateLogText(eventLogArray[0])
+        console.log(eventLogArray) 
+
+        renderEventLog(eventLogArray)
+
+    }
+            
+
 
 }
+
+// Update Event Log
+
+let eventLogArray = []
+let eventLogText = document.getElementById('event-log')
+
+function renderEventLog() {
+    for (let i=0; i < eventLogArray.length; i++) {
+        eventLogText.innerHTML += eventLogArray[i]
+    }
+}
+
 
 kickSomeAssButton.addEventListener("click", function() {
 
@@ -214,18 +239,16 @@ basicMoveUndoButton.addEventListener("click", function(){
     basicMoveArray.shift()
     eventLogArray.shift()
     renderBasicMoves()
-    // eventLogArray.forEach(updateLogText)
+    // eventLogArray.forEach(renderEventLog)
     
 })
 
-// Event log
 
-let eventLogArray = []
-let eventLogText = document.getElementById('event-log')
 
-eventLogArray.forEach(updateLogText)
 
-function updateLogText(item) {
-    eventLogText.innerHTML += `<li>${item}</li>`;
-}
+// eventLogArray.forEach(renderEventLog)
+
+// function renderEventLog(item) {
+//     eventLogText.innerHTML += `<li>${item}</li>`;
+// }
 
