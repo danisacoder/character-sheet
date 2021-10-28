@@ -177,27 +177,29 @@ function basicRoll(type) {
 function renderBasicMoves() {
             
     // declare a variable for the most recent entry (probably an easier way to do this...)
-    let lastRoll = basicMoveArray.length - 1
+    // let lastRoll = basicMoveArray[0]
     
     // render the move math text
-    basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough})` 
+    basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough})` 
 
     // render the results text (large and in charge)
-    basicMoveResults.innerHTML = `${basicMoveArray[lastRoll][3]}`
+    basicMoveResults.innerHTML = `${basicMoveArray[0][3]}`
 
-    // push the text into an array entry
-    eventLogArray.push(`Kick Some Ass: 2d6 (${basicMoveArray[lastRoll][0]} + ${basicMoveArray[lastRoll][1]} = ${basicMoveArray[lastRoll][2]}) + Tough (${tough}) = ${basicMoveArray[lastRoll][3]}`)
+    // push the text into an array entry for later (in case we want to revert, for example)
+    eventLogArray.unshift(`Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough}) = ${basicMoveArray[0][3]}`)
 
-    console.log(eventLogArray)
+    // console.log(eventLogArray) 
 
-    updateLogText(eventLogArray[lastRoll])
+    updateLogText(eventLogArray[0])
 
 }
 
 kickSomeAssButton.addEventListener("click", function() {
+
     // put the latest string in the roll history array
-    basicMoveArray.push(basicRoll(tough))
-    
+    basicMoveArray.unshift(basicRoll(tough))
+    // console.log(basicMoveArray)
+
     renderBasicMoves()
 })
 
@@ -209,10 +211,10 @@ const basicMoveUndoButton = document.getElementById('basic-move-undo-button')
 basicMoveUndoButton.addEventListener("click", function(){
     // let previousRoll = basicMoveArray.length - 2
 
-    basicMoveArray.pop()
-    eventLogArray.pop()
+    basicMoveArray.shift()
+    eventLogArray.shift()
     renderBasicMoves()
-    eventLogArray.forEach(updateLogText)
+    // eventLogArray.forEach(updateLogText)
     
 })
 
