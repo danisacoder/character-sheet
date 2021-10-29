@@ -165,85 +165,96 @@ const actUnderPressureButton = document.getElementById('act-under-pressure')
 let basicMoveArray = []
 
 
-function basicRoll(type) {
+function basicRoll(moveTypeText, ratingType, ratingText) {
     const die1 = dieRoller()
     const die2 = dieRoller()    
     const diceSum = die1 + die2
-    const addType = diceSum + (type)
+    const addType = diceSum + (ratingType)
 
-    return [die1, die2, diceSum, addType]
+    return [moveTypeText, die1, die2, diceSum, addType, ratingType, ratingText]
 }
 
 function renderBasicMoves() {
 
     if (basicMoveArray.length === 0) {
         
-        // blank the page text out
+        // blank the text out if there are no moves left in the array
         basicMoveMath.innerHTML = ""
         basicMoveResults.innerHTML = ""
 
-        // you also need to blank out the event log text here...
-
     } else {
     
-        // render the move math text
-        basicMoveMath.innerHTML = `Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough})` 
+        // render the move math text on the page
+        basicMoveMath.innerHTML = `${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]})` 
 
-        // render the results text (large and in charge)
+        // render the results text (large and in charge) on the page
         basicMoveResults.innerHTML = `${basicMoveArray[0][3]}`
 
-        console.log(basicMoveArray)
-
-        // push the text into an array entry for later (in case we want to revert, for example)
-        eventLogArray.unshift(`Kick Some Ass: 2d6 (${basicMoveArray[0][0]} + ${basicMoveArray[0][1]} = ${basicMoveArray[0][2]}) + Tough (${tough}) = ${basicMoveArray[0][3]}`)
-
-        console.log(eventLogArray) 
-
-        renderEventLog(eventLogArray)
-
     }
-            
-
 
 }
 
-// Update Event Log
-
+// Event Log array and DOM element
 let eventLogArray = []
 let eventLogText = document.getElementById('event-log')
 
+// Render the Event Log
 function renderEventLog() {
-    for (let i=0; i < eventLogArray.length; i++) {
-        eventLogText.innerHTML += eventLogArray[i]
+    
+    // blank out the event log text if it's 0
+    if (eventLogArray.length === 0) {
+        eventLogText.innerHTML = ''
+
+    } else {
+        
+        console.log(eventLogArray)
+        eventLogText.innerHTML = ''
+        // render text for every entry in the log array
+        for (let i=0; i < eventLogArray.length; i++) {
+            eventLogText.innerHTML += `<li>${eventLogArray[i]}</li>`
+        }
     }
 }
 
 
 kickSomeAssButton.addEventListener("click", function() {
 
-    // put the latest string in the roll history array
-    basicMoveArray.unshift(basicRoll(tough))
-    // console.log(basicMoveArray)
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Kick Some Ass', tough, 'Tough'))
+
+    console.log(basicMoveArray)
+
+    eventLogArray.unshift(`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`)
+
+    console.log(eventLogArray)
 
     renderBasicMoves()
+    renderEventLog()
 })
 
 
 // Basic Moves undo button
-
 const basicMoveUndoButton = document.getElementById('basic-move-undo-button')
 
 basicMoveUndoButton.addEventListener("click", function(){
-    // let previousRoll = basicMoveArray.length - 2
-
+    // remove the most recent item (which is always the 0th item) in the basic move array and the event log array
     basicMoveArray.shift()
     eventLogArray.shift()
+ 
+    console.log(basicMoveArray)
+    console.log(eventLogArray)
+
     renderBasicMoves()
-    // eventLogArray.forEach(renderEventLog)
-    
+    renderEventLog()
 })
 
 
+
+const eventClear = document.getElementById('event-clear')
+
+eventClear.addEventListener("click", function(){
+    eventLogText.innerHTML = ''
+})
 
 
 // eventLogArray.forEach(renderEventLog)
