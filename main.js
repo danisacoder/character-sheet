@@ -188,7 +188,7 @@ function renderBasicMoves() {
         basicMoveMath.innerHTML = `${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]})` 
 
         // render the results text (large and in charge) on the page
-        basicMoveResults.innerHTML = `${basicMoveArray[0][3]}`
+        basicMoveResults.innerHTML = `${basicMoveArray[0][4]}`
 
     }
 
@@ -211,7 +211,7 @@ function renderEventLog() {
         eventLogText.innerHTML = ''
         // render text for every entry in the log array
         for (let i=0; i < eventLogArray.length; i++) {
-            eventLogText.innerHTML += `<li>${eventLogArray[i]}</li>`
+            eventLogText.innerHTML += `${eventLogArray[i]}<br>`
         }
     }
 }
@@ -225,6 +225,22 @@ kickSomeAssButton.addEventListener("click", function() {
     console.log(basicMoveArray)
 
     eventLogArray.unshift(`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`)
+
+    console.log(eventLogArray)
+
+    renderBasicMoves()
+    renderEventLog()
+})
+
+
+actUnderPressureButton.addEventListener("click", function() {
+
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Act Under Pressure', cool, 'Cool'))
+
+    console.log(basicMoveArray)
+
+    eventLogArray.unshift(`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][4]}`)
 
     console.log(eventLogArray)
 
@@ -248,18 +264,8 @@ basicMoveUndoButton.addEventListener("click", function(){
     renderEventLog()
 })
 
+const basicMoveDetails = document.getElementById('basic-move-details')
 
-
-const eventClear = document.getElementById('event-clear')
-
-eventClear.addEventListener("click", function(){
-    eventLogText.innerHTML = ''
-})
-
-
-// eventLogArray.forEach(renderEventLog)
-
-// function renderEventLog(item) {
-//     eventLogText.innerHTML += `<li>${item}</li>`;
-// }
-
+function renderBasicMoveDetailText() {
+    
+}
