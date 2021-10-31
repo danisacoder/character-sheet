@@ -7,11 +7,11 @@ const harmText = document.getElementById('harm-text')
 const harmBarArray = []
 let currentHarm = 4
 
-// Display number of harm out of 8
+// Display number of harm out of 8 - need an additional emoji here
 
 harmEmojiArray = ['😄','🙂','🙁','🤒','🤕','😵‍💫','😵','💀']
 
-function displayHarmText() {
+function renderHarmText() {
     
     harmText.innerHTML = 'Harm: ' + currentHarm + `/8 ${harmEmojiArray[currentHarm]}`
 }
@@ -54,11 +54,11 @@ let usedLuck = 1
 
 // Display used luck out of 7
 
-function displayLuckText() {
+function renderLuckText() {
     luckText.innerHTML = 'Used Luck: ' + usedLuck + '/7 🍀'
 }
 
-displayLuckText()
+renderLuckText()
 
 // Experience DOM elements and variables
 
@@ -72,12 +72,12 @@ let level = 3
 
 // Display experience out of 5 status
 
-function displayExperienceText() {
+function renderExperienceText() {
     experienceText.innerHTML = 'Experience: ' + experience + '/5 ⚡'
     experienceStatusText.innerHTML = 'Level: ' + level
 }
 
-displayExperienceText()
+renderExperienceText()
 
 // Function to draw the harm, luck, and experience bars
 
@@ -128,7 +128,7 @@ const weirdText = document.getElementById('weird')
 
 // Show the ratings on the page
 
-function displayRatingsText() {
+function renderRatingsText() {
 
     charmText.textContent = `Charm: ${charm}`
     coolText.textContent = `Cool: ${cool}`
@@ -138,7 +138,7 @@ function displayRatingsText() {
     
 }
 
-displayRatingsText()
+renderRatingsText()
 
 // Basic 2d6 dice roller
 
@@ -156,12 +156,9 @@ rollButton.addEventListener("click", function() {
 
     basicRollArray.unshift([die1, die2, dieSum])
 
-    eventLogArray.unshift([0,`Dice Roller: 2d6 (${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]})`])
+    eventLogArray.unshift([0,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
 
-    console.log(basicRollArray)
-
-    renderBasicRoll()
-    renderEventLog()
+    renderAll()
 })
 
 function renderBasicRoll() {
@@ -336,7 +333,14 @@ function renderAll() {
     renderBasicMoves()
     renderBasicRoll()
     renderEventLog()
+    renderHarmText()
+    renderRatingsText()
+    renderExperienceText()
+    renderLuckText()
+    
 }
+
+renderAll()
 
 const basicMoveDetails = document.getElementById('basic-move-details')
 
