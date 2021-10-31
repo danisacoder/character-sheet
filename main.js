@@ -9,11 +9,19 @@ let currentHarm = 4
 
 // Display number of harm out of 8
 
+harmEmojiArray = ['😄','🙂','🙁','🤒','🤕','😵‍💫','😵','💀']
+
 function displayHarmText() {
-    harmText.innerHTML = 'Harm: ' + currentHarm + '/8 🤕'
+    
+    harmText.innerHTML = 'Harm: ' + currentHarm + `/8 ${harmEmojiArray[currentHarm]}`
 }
 
-displayHarmText()
+// Increment harm up and down with buttons
+
+const harmUpButton = document.getElementById('harm-up-button') 
+const harmDownButton = document.getElementById('harm-button-button') 
+
+// harmUpButton.
 
 // Show statuses based on number of harm
 
@@ -136,34 +144,54 @@ displayRatingsText()
 
 function dieRoller() {
     const randomNum = (Math.floor(Math.random() * 6) + 1)
-    // console.log(randomNum)
     return randomNum
 }
+
+basicRollArray = []
 
 rollButton.addEventListener("click", function() {
     const die1 = dieRoller()
     const die2 = dieRoller()
     const dieSum = die1 + die2
 
-    rollMath.innerHTML = `${die1} + ${die2}`
-    
-    rollResults.innerHTML = `${dieSum}`
+    basicRollArray.unshift([die1, die2, dieSum])
+
+    eventLogArray.unshift([0,`Dice Roller: 2d6 (${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]})`])
+
+    console.log(basicRollArray)
+
+    renderBasicRoll()
+    renderEventLog()
 })
 
-// Pre-set dice roll variables
+function renderBasicRoll() {
+
+    if (basicRollArray.length === 0) {
+        rollMath.innerHTML = ""
+        rollResults.innerHTML = ""
+    } else {
+        rollMath.innerHTML = `${basicRollArray[0][0]} + ${basicRollArray[0][1]}`
+        rollResults.innerHTML = `${basicRollArray[0][2]}`
+    }
+
+}
+
+// Basic move dice roll DOM variables
 
 const basicMoveResults = document.getElementById('basic-move-results')
 const basicMoveMath = document.getElementById('basic-move-math')
 
-const kickSomeAssButton = document.getElementById('kick-some-ass') 
-const actUnderPressureButton = document.getElementById('act-under-pressure') 
-
-
+const kickSomeAssButton = document.getElementById('kick-some-ass-button') 
+const actUnderPressureButton = document.getElementById('act-under-pressure-button') 
+const helpOutButton = document.getElementById('help-out-button')
+const investigateAMysteryButton = document.getElementById('investigate-a-mystery-button')
+const manipulateSomeoneButton = document.getElementById('manipulate-someone-button')
+const protectSomeoneButton = document.getElementById('protect-someone-button')
+const readABadSituationButton = document.getElementById('read-a-bad-situation-button')
 
 // Basic move dice roll functions
 
 let basicMoveArray = []
-
 
 function basicRoll(moveTypeText, ratingType, ratingText) {
     const die1 = dieRoller()
@@ -211,58 +239,104 @@ function renderEventLog() {
         eventLogText.innerHTML = ''
         // render text for every entry in the log array
         for (let i=0; i < eventLogArray.length; i++) {
-            eventLogText.innerHTML += `${eventLogArray[i]}<br>`
+            eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
         }
     }
 }
 
+function pushBasicActionToArray() {
+
+    eventLogArray.unshift([1,`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`])
+}
+
+// I have to come back and refactor this later; I think the thing to do is use an array related to each type of basic move 
 
 kickSomeAssButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
     basicMoveArray.unshift(basicRoll('Kick Some Ass', tough, 'Tough'))
-
-    console.log(basicMoveArray)
-
-    eventLogArray.unshift(`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`)
-
-    console.log(eventLogArray)
-
-    renderBasicMoves()
-    renderEventLog()
+    pushBasicActionToArray()
+    renderAll()
 })
-
 
 actUnderPressureButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
     basicMoveArray.unshift(basicRoll('Act Under Pressure', cool, 'Cool'))
 
-    console.log(basicMoveArray)
+    pushBasicActionToArray()
+    renderAll()
+})
 
-    eventLogArray.unshift(`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][4]}`)
+helpOutButton.addEventListener("click", function() {
 
-    console.log(eventLogArray)
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Help Out', cool, 'Cool'))
 
-    renderBasicMoves()
-    renderEventLog()
+    pushBasicActionToArray()
+    renderAll()
+})
+
+investigateAMysteryButton.addEventListener("click", function() {
+
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Invesetigate A Mystery', sharp, 'Sharp'))
+
+    pushBasicActionToArray()
+    renderAll()
+})
+
+manipulateSomeoneButton.addEventListener("click", function() {
+
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Manipulate Someone', charm, 'Charm'))
+
+    pushBasicActionToArray()
+    renderAll()
+})
+
+protectSomeoneButton.addEventListener("click", function() {
+
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Protect Someone', tough, 'Tough'))
+
+    pushBasicActionToArray()
+    renderAll()
+})
+
+readABadSituationButton.addEventListener("click", function() {
+
+    // make a basic roll using the Kick Some Ass parameters and record it in the array
+    basicMoveArray.unshift(basicRoll('Read A Bad Situation', sharp, 'Sharp'))
+
+    pushBasicActionToArray()
+    renderAll()
 })
 
 
-// Basic Moves undo button
-const basicMoveUndoButton = document.getElementById('basic-move-undo-button')
+let eventLogUndoButton = document.getElementById('event-log-undo-button')
 
-basicMoveUndoButton.addEventListener("click", function(){
-    // remove the most recent item (which is always the 0th item) in the basic move array and the event log array
-    basicMoveArray.shift()
+eventLogUndoButton.addEventListener("click", function() {
+    if (eventLogArray[0][0] === 0) {
+        undo(basicRollArray)
+    } else if (eventLogArray[0][0] === 1) {
+        undo(basicMoveArray)
+    }
+})
+
+function undo(array) {
+    array.shift()
     eventLogArray.shift()
- 
-    console.log(basicMoveArray)
-    console.log(eventLogArray)
+
+    renderAll()
+}
+
+function renderAll() {
 
     renderBasicMoves()
+    renderBasicRoll()
     renderEventLog()
-})
+}
 
 const basicMoveDetails = document.getElementById('basic-move-details')
 

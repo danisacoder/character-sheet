@@ -112,3 +112,7 @@ section {
 }
 
 /* Still not centered... */
+
+.bold {
+    font-weight: bold;
+}
