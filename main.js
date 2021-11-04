@@ -4,38 +4,88 @@ const harmBar = document.getElementById('harm-bar')
 const harmStatusText = document.getElementById('harm-status-text')
 const harmText = document.getElementById('harm-text')
 
-const harmBarArray = []
-let currentHarm = 4
+let harmBarArray = []
+let currentHarmArray = [4]
 
 // Display number of harm out of 8 - need an additional emoji here
 
-harmEmojiArray = ['😄','🙂','🙁','🤒','🤕','😵‍💫','😵','💀']
+harmEmojiArray = ['🤠','🙂','😐','🙁','🤒','🤕','😱','😵','💀']
 
 function renderHarmText() {
     
-    harmText.innerHTML = 'Harm: ' + currentHarm + `/8 ${harmEmojiArray[currentHarm]}`
+    harmText.innerHTML = `Harm: ${currentHarmArray[0]}/8 ${harmEmojiArray[currentHarmArray[0]]}`
 }
 
 // Increment harm up and down with buttons
 
+const harmDownButton = document.getElementById('harm-down-button') 
 const harmUpButton = document.getElementById('harm-up-button') 
-const harmDownButton = document.getElementById('harm-button-button') 
 
-// harmUpButton.
+harmDownButton.addEventListener("click", function() { 
+    if (currentHarmArray[0] === 0) {
+        return
+    } else {
+        currentHarmArray.unshift(currentHarmArray[0] - 1)
+        console.log(currentHarmArray)
+    }
+
+    eventLogArray.unshift([0, `Harm decreased from ${currentHarmArray[1]} to ${currentHarmArray[0]}`])
+    console.log(eventLogArray)
+
+    renderAll()
+
+})
+
+harmUpButton.addEventListener("click", function() { 
+    if (currentHarmArray[0] === 8) {
+        return
+    } else {
+        currentHarmArray.unshift(currentHarmArray[0] + 1)
+        console.log(currentHarmArray)
+    }
+
+    eventLogArray.unshift([0, `Harm increased from ${currentHarmArray[1]} to ${currentHarmArray[0]}`])
+
+    renderAll()
+
+})
 
 // Show statuses based on number of harm
 
-if (currentHarm < 3) {
-    
-    harmStatusText.innerHTML = ''
+function renderStatusText() {
 
-} else if (currentHarm > 3) {
+   if (currentHarmArray[0] > 3 && currentHarmArray[0] < 8) {
+        harmStatusText.innerHTML = 'Status: Unstable'
+    } else if (currentHarmArray[0] === 8) {
+        harmStatusText.innerHTML = 'Status: Unconscious'
+    } else { 
+        harmStatusText.innerHTML = ''
+    }
 
-    harmStatusText.innerHTML = 'Status: Unstable'
-
-} else if (currentHarm > 6) {
-    harmStatusText.innerHTML = 'Almost Dead?'
 }
+
+// const basicMoveInfoText = document.getElementById('basic-move-info-text')
+
+// const infoArray = [
+//     {
+//         stuff:`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.`,
+//         things: `Choose on extra effect:<br>
+//             <ul>
+//                 <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
+//                 <li>You inflict terrible harm (+1 harm)</li>
+//                 <li>You suffer less harm (-1 harm)</li>
+//                 <li>You force them where you want them</li>
+//             </ul>`
+//     }
+// ]
+
+// function renderinfoArray() {
+//     if (basicMoveArray[0][4] > 7) {
+//         basicMoveInfoText.innerHTML = `${infoArray.butts}`    
+//     } 
+// }
+
+// renderinfoArray()
 
 // Dice and results DOM elements
 
@@ -48,17 +98,55 @@ const rollResults = document.getElementById('roll-results')
 const luckBar = document.getElementById('luck-bar')
 const luckText = document.getElementById('luck-text')
 const luckStatusText = document.getElementById('luck-status-text')
+const luckDownButton = document.getElementById('luck-down-button')
+const luckUpButton = document.getElementById('luck-up-button')
 
 const luckBarArray = []
-let usedLuck = 1
+let usedLuckArray = [1] 
 
 // Display used luck out of 7
 
 function renderLuckText() {
-    luckText.innerHTML = 'Used Luck: ' + usedLuck + '/7 🍀'
+    luckText.innerHTML = `Used Luck: ${usedLuckArray[0]}/7 🍀`
 }
 
-renderLuckText()
+function renderLuckStatusText() {
+
+    if (usedLuckArray[0] > 6) {
+        luckStatusText.innerHTML = 'Doomed'
+    } else {
+        luckStatusText.innerHTML = ''
+    }
+
+}
+
+luckDownButton.addEventListener("click", function() {
+    if (usedLuckArray[0] === 0) {
+        return
+    } else {
+        usedLuckArray.unshift(usedLuckArray[0] - 1)
+        console.log(usedLuckArray)
+    }
+
+    eventLogArray.unshift([1,`Luck decreased from ${usedLuckArray[1]} to ${usedLuckArray[0]}`])
+
+    renderAll() 
+
+})
+
+luckUpButton.addEventListener("click", function() {
+    if (usedLuckArray[0] === 7) {
+        return
+    } else {
+        usedLuckArray.unshift(usedLuckArray[0] + 1)
+        console.log(usedLuckArray)
+    }
+
+    eventLogArray.unshift([1,`Used luck increased from ${usedLuckArray[1]} to ${usedLuckArray[0]}`])
+
+    renderAll() 
+
+})
 
 // Experience DOM elements and variables
 
@@ -81,7 +169,12 @@ renderExperienceText()
 
 // Function to draw the harm, luck, and experience bars
 
-function drawBar(length, barName, barArray, barFill, barClassName, fillClassName, barClassName2) {
+function renderBar(length, barName, barArray, barFill, barClassName, fillClassName, barClassName2) {
+
+// blank out the bar before redrawing the colored divs
+
+    barName.innerHTML = ''
+    barArray = []
 
 // draw the bar
 
@@ -91,7 +184,7 @@ function drawBar(length, barName, barArray, barFill, barClassName, fillClassName
         barName.appendChild(squares)
         barArray.push(squares)
     }
-    
+
 // fill the boxes
 
     for (let i=0; i<barFill; i++) {
@@ -102,15 +195,27 @@ function drawBar(length, barName, barArray, barFill, barClassName, fillClassName
 
 // Create harm bar
 
-drawBar(8, harmBar, harmBarArray, currentHarm, 'square', 'harm')
+function renderHarmBar() {
+
+    renderBar(8, harmBar, harmBarArray, currentHarmArray[0], 'square', 'harm')
+
+}
 
 // Create luck bar
 
-drawBar(7, luckBar, luckBarArray, usedLuck, 'square', 'usedLuck', 'green')
+function renderLuckBar() {
+
+    renderBar(7, luckBar, luckBarArray, usedLuckArray[0], 'square', 'usedLuck', 'green')
+
+}
 
 // Create experience bar
 
-drawBar(5, experienceBar, experienceBarArray, experience, 'square', 'experience')
+function renderExperienceBar() {
+
+    renderBar(5, experienceBar, experienceBarArray, experience, 'square', 'experience')
+
+}
 
 // Ratings variables/DOM elements
 
@@ -156,7 +261,7 @@ rollButton.addEventListener("click", function() {
 
     basicRollArray.unshift([die1, die2, dieSum])
 
-    eventLogArray.unshift([0,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
+    eventLogArray.unshift([5,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
 
     renderAll()
 })
@@ -173,7 +278,7 @@ function renderBasicRoll() {
 
 }
 
-// Basic move dice roll DOM variables
+// Basic Moves dice roll DOM variables
 
 const basicMoveResults = document.getElementById('basic-move-results')
 const basicMoveMath = document.getElementById('basic-move-math')
@@ -219,13 +324,17 @@ function renderBasicMoves() {
 
 }
 
+// Info array for roll-based information
+
+
+
 // Event Log array and DOM element
 let eventLogArray = []
 let eventLogText = document.getElementById('event-log')
 
 // Render the Event Log
 function renderEventLog() {
-    
+
     // blank out the event log text if it's 0
     if (eventLogArray.length === 0) {
         eventLogText.innerHTML = ''
@@ -235,15 +344,21 @@ function renderEventLog() {
         console.log(eventLogArray)
         eventLogText.innerHTML = ''
         // render text for every entry in the log array
-        for (let i=0; i < eventLogArray.length; i++) {
-            eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
+        for (let i=0; i < 6; i++) {
+                    eventLogText.innerHTML += `${eventLogArray[i][1]}<br>` 
         }
+
+        // console.log('hi')
+
+    // eventLogArray[eventLogArray.length-1].classList.add('bold')
+
     }
+
 }
 
 function pushBasicActionToArray() {
 
-    eventLogArray.unshift([1,`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`])
+    eventLogArray.unshift([4,`${basicMoveArray[0][0]}: 2d6 (${basicMoveArray[0][1]} + ${basicMoveArray[0][2]} = ${basicMoveArray[0][3]}) + ${basicMoveArray[0][6]} (${basicMoveArray[0][5]}) = ${basicMoveArray[0][3]}`])
 }
 
 // I have to come back and refactor this later; I think the thing to do is use an array related to each type of basic move 
@@ -310,14 +425,19 @@ readABadSituationButton.addEventListener("click", function() {
     renderAll()
 })
 
-
 let eventLogUndoButton = document.getElementById('event-log-undo-button')
 
 eventLogUndoButton.addEventListener("click", function() {
-    if (eventLogArray[0][0] === 0) {
+// undo basic rolls   
+    if (eventLogArray[0][0] === 5) {
         undo(basicRollArray)
-    } else if (eventLogArray[0][0] === 1) {
+// undo basic moves
+    } else if (eventLogArray[0][0] === 4) {
         undo(basicMoveArray)
+// undo harm Bar adjustments
+    } else if (eventLogArray[0][0] === 0) {
+        currentHarmArray.shift()
+        undo(harmBarArray)
     }
 })
 
@@ -337,13 +457,18 @@ function renderAll() {
     renderRatingsText()
     renderExperienceText()
     renderLuckText()
-    
+    renderHarmBar()
+    renderExperienceBar()
+    renderStatusText()
+    renderLuckBar()
+    renderLuckText()
+    renderLuckStatusText()
 }
 
 renderAll()
 
-const basicMoveDetails = document.getElementById('basic-move-details')
+// const basicMoveDetails = document.getElementById('basic-move-details')
 
-function renderBasicMoveDetailText() {
+// function renderBasicMoveDetailText() {
     
-}
+// }
