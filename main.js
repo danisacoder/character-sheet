@@ -335,26 +335,23 @@ let eventLogText = document.getElementById('event-log')
 // Render the Event Log
 function renderEventLog() {
 
-    // blank out the event log text if it's 0
+    // blank out the event log text if array is empty    
     if (eventLogArray.length === 0) {
         eventLogText.innerHTML = ''
 
     } else {
         
-        console.log(eventLogArray)
+        // blank out existing text
         eventLogText.innerHTML = ''
         // render text for every entry in the log array
-        for (let i=0; i < 6; i++) {
-                    eventLogText.innerHTML += `${eventLogArray[i][1]}<br>` 
+        for (let i=0; i < eventLogArray.length; i++) {
+            if (i === 6) { break }
+            eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
         }
-
-        // console.log('hi')
-
-    // eventLogArray[eventLogArray.length-1].classList.add('bold')
-
     }
 
 }
+
 
 function pushBasicActionToArray() {
 
@@ -367,6 +364,7 @@ kickSomeAssButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
     basicMoveArray.unshift(basicRoll('Kick Some Ass', tough, 'Tough'))
+    // console.log(basicMoveArray)
     pushBasicActionToArray()
     renderAll()
 })
@@ -438,6 +436,9 @@ eventLogUndoButton.addEventListener("click", function() {
     } else if (eventLogArray[0][0] === 0) {
         currentHarmArray.shift()
         undo(harmBarArray)
+    } else if (eventLogArray[0][0] === 1) {
+        luckBarArray.shift()
+        undo(usedLuckArray)
     }
 })
 
