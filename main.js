@@ -291,6 +291,7 @@ function renderBasicRoll() {
             rollMath.innerHTML = `${basicRollArray[0][0]} + ${basicRollArray[0][1]}`
             rollResults.innerHTML = `${basicRollArray[0][2]}`
         } else {
+            rollMath.innerHTML = ''
             rollResults.innerHTML = `${basicRollArray[0][2]}`
         }
 
