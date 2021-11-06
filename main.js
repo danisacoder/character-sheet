@@ -89,7 +89,8 @@ function renderStatusText() {
 
 // Dice and results DOM elements
 
-const rollButton = document.getElementById('roll-btn')
+const roll1D6Button = document.getElementById('roll-2d6-button')
+const roll2D6Button = document.getElementById('roll-2d6-button')
 const rollMath = document.getElementById('roll-math')
 const rollResults = document.getElementById('roll-results')
 
@@ -254,14 +255,30 @@ function dieRoller() {
 
 basicRollArray = []
 
-rollButton.addEventListener("click", function() {
+// roll1D6Button.addEventListener("click", function() {
+//     const die1 = dieRoller()
+
+//     const dieSum = die1
+
+//     basicRollArray.unshift([die1, die2, dieSum])
+
+//     eventLogArray.unshift([5,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
+
+//     renderAll()
+// })
+
+roll2D6Button.addEventListener("click", function() {
     const die1 = dieRoller()
     const die2 = dieRoller()
     const dieSum = die1 + die2
 
     basicRollArray.unshift([die1, die2, dieSum])
 
+  
+
     eventLogArray.unshift([5,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
+
+    console.log(eventLogArray)
 
     renderAll()
 })
@@ -464,6 +481,7 @@ function renderAll() {
     renderLuckBar()
     renderLuckText()
     renderLuckStatusText()
+    
 }
 
 renderAll()
