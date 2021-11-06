@@ -89,7 +89,7 @@ function renderStatusText() {
 
 // Dice and results DOM elements
 
-const roll1D6Button = document.getElementById('roll-2d6-button')
+const roll1D6Button = document.getElementById('roll-1d6-button')
 const roll2D6Button = document.getElementById('roll-2d6-button')
 const rollMath = document.getElementById('roll-math')
 const rollResults = document.getElementById('roll-results')
@@ -255,30 +255,28 @@ function dieRoller() {
 
 basicRollArray = []
 
-// roll1D6Button.addEventListener("click", function() {
-//     const die1 = dieRoller()
+roll1D6Button.addEventListener("click", function() {
+    const die1 = dieRoller()
+    const die2 = ""
+    const dieTotal = die1
+    
+    basicRollArray.unshift([die1, die2, dieTotal])
 
-//     const dieSum = die1
+    eventLogArray.unshift([5,`Dice Roller: 1d6 = ${basicRollArray[0][2]}`])
 
-//     basicRollArray.unshift([die1, die2, dieSum])
-
-//     eventLogArray.unshift([5,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
-
-//     renderAll()
-// })
+    renderAll()
+})
 
 roll2D6Button.addEventListener("click", function() {
     const die1 = dieRoller()
     const die2 = dieRoller()
-    const dieSum = die1 + die2
+    const dieTotal = die1 + die2
 
-    basicRollArray.unshift([die1, die2, dieSum])
+    basicRollArray.unshift([die1, die2, dieTotal])
 
   
 
     eventLogArray.unshift([5,`Dice Roller: 2d6: ${basicRollArray[0][0]} + ${basicRollArray[0][1]} = ${basicRollArray[0][2]}`])
-
-    console.log(eventLogArray)
 
     renderAll()
 })
@@ -289,8 +287,13 @@ function renderBasicRoll() {
         rollMath.innerHTML = ""
         rollResults.innerHTML = ""
     } else {
-        rollMath.innerHTML = `${basicRollArray[0][0]} + ${basicRollArray[0][1]}`
-        rollResults.innerHTML = `${basicRollArray[0][2]}`
+        if (basicRollArray[0][1] != 0) {
+            rollMath.innerHTML = `${basicRollArray[0][0]} + ${basicRollArray[0][1]}`
+            rollResults.innerHTML = `${basicRollArray[0][2]}`
+        } else {
+            rollResults.innerHTML = `${basicRollArray[0][2]}`
+        }
+
     }
 
 }
