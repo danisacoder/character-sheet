@@ -26,11 +26,11 @@ harmDownButton.addEventListener("click", function() {
         return
     } else {
         currentHarmArray.unshift(currentHarmArray[0] - 1)
-        console.log(currentHarmArray)
+        // console.log(currentHarmArray)
     }
 
     eventLogArray.unshift([0, `Harm decreased from ${currentHarmArray[1]} to ${currentHarmArray[0]}`])
-    console.log(eventLogArray)
+    // console.log(eventLogArray)
 
     renderAll()
 
@@ -41,7 +41,7 @@ harmUpButton.addEventListener("click", function() {
         return
     } else {
         currentHarmArray.unshift(currentHarmArray[0] + 1)
-        console.log(currentHarmArray)
+        // console.log(currentHarmArray)
     }
 
     eventLogArray.unshift([0, `Harm increased from ${currentHarmArray[1]} to ${currentHarmArray[0]}`])
@@ -103,7 +103,7 @@ luckDownButton.addEventListener("click", function() {
         return
     } else {
         usedLuckArray.unshift(usedLuckArray[0] - 1)
-        console.log(usedLuckArray)
+        // console.log(usedLuckArray)
     }
 
     eventLogArray.unshift([1,`Luck decreased from ${usedLuckArray[1]} to ${usedLuckArray[0]}`])
@@ -158,14 +158,14 @@ experienceDownButton.addEventListener("click", function() {
     // console.log(currentExperienceArray)
     // console.log(currentLevelArray)
     // console.log(eventLogArray)
-    console.log(experienceBarArray)
+    // console.log(experienceBarArray)
     renderAll() 
 })
 
 experienceUpButton.addEventListener("click", function() {
     if (currentExperienceArray[0] === 4) {
         currentExperienceArray.unshift(0)
-        console.log(currentExperienceArray)
+        // console.log(currentExperienceArray)
         levelUp()
         eventLogArray.unshift([8,`Experience increased from 4 to 5, reset to 0`])
 
@@ -372,7 +372,7 @@ function renderBasicMoves() {
 
 
     }
-    console.log(basicMoveArray)
+    // console.log(basicMoveArray)
 }
 
 // Info array for roll-based information
@@ -400,7 +400,6 @@ function renderEventLog() {
             eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
         }
     }
-
 }
 
 
@@ -531,25 +530,84 @@ function undo(array) {
 const basicMoveInfoText = document.getElementById('basic-move-info-text')
 
 const infoArray = [
-    { 1:`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
-        Choose one extra effect:<br>
-            <ul>
-                <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
-                <li>You inflict terrible harm (+1 harm)</li>
-                <li>You suffer less harm (-1 harm)</li>
-                <li>You force them where you want them</li>
-            </ul>`
+    {'kickSomeAss' : 
+        { 
+            '7+':`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
+            `,
+            '10+': `Choose one extra effect:<br>
+                        <ul>
+                            <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
+                            <li>You inflict terrible harm (+1 harm)</li>
+                            <li>You suffer less harm (-1 harm)</li>
+                            <li>You force them where you want them</li>
+                        </ul>`,
+            '12+': `Pick an ehanced effect:<br>
+                        <ul>
+                            <li>You completely hold the advantage. All hunters involved in the fight get +1 forward.</li>
+                            <li>You suffer no harm at all.</li>
+                            <li>Your attack inflict double the normal harm.</li>
+                            <li>Your attack drives the enemy away in a rout.</li>
+                        </ul>`
+        }
+    }, 
+    {'actUnderPressure' : 
+        {
+            '7+':`The Keeper is going to give you:<br>
+                    <ul>
+                        <li>A worse outcome</li>
+                        <li>A hard choice</li>
+                        <li>A price to pay</li>
+                    </ul>`,
+            '10+':`You do what you set out to do.`,
+            '12+': `You may choose to either do what you wanted and something extra, or to do what you wanted to absolute perfection.`
+        }
+
     }
+
 ]
 
 function renderInfoArray() {
+
     if (basicMoveArray.length === 0) {} else {
-        if (basicMoveArray[0][4] > 7) {
-            basicMoveInfoText.innerHTML = `${infoArray[0]['1']}`    
-            console.log(infoArray[0]['1'])
-        } 
-    }
+    // this is how I can tell the type of move from basicMoveArray
+    const type = basicMoveArray[0][0]
+   
+    // this is how I can get the dice result from basicMoveArray
+    const results = basicMoveArray[0][4]
+  
+    // Shortening Kick Some Ass array junk
+    let kickSomeAss = infoArray[0]['kickSomeAss']
+    let actUnderPressure = infoArray[0]['actUnderPressure']
+
+        if (type === 'Kick Some Ass') {
+            if (results >= 7 && results < 10) {
+                basicMoveInfoText.innerHTML = `${kickSomeAss['7+']}`
+            } else if (results >= 10 && results < 12) {
+                basicMoveInfoText.innerHTML = `${kickSomeAss['10+']}`
+            } else if (results >= 12) {
+                basicMoveInfoText.innerHTML = `${kickSomeAss['12+']}`
+            }   
+        } else if (type === 'Act Under Pressure') {
+            if (results >= 7 && results < 10) {
+                basicMoveInfoText.innerHTML = `${actUnderPressure['7+']}`
+            } else if (results >= 10 && results < 12) {
+                basicMoveInfoText.innerHTML = `${actUnderPressure['10+']}`
+            } else if (results >= 12) {
+                basicMoveInfoText.innerHTML = `${actUnderPressure['12+']}`
+                console.log(actUnderPressure)
+            }   
+
+        }
+
+    }  
+
+        // if this is an Act Under Pressure move
+
+
+
 }
+
+
 
 function renderAll() {
 
@@ -579,4 +637,4 @@ renderAll()
     
 // }
 
-console.log(eventLogArray)
+
