@@ -154,19 +154,59 @@ luckUpButton.addEventListener("click", function() {
 const experienceBar = document.getElementById('experience-bar')
 const experienceText = document.getElementById('experience-text')
 const experienceStatusText = document.getElementById('experience-status-text')
+const experienceDownButton = document.getElementById('experience-down-button')
+const experienceUpButton = document.getElementById('experience-up-button')
 
 const experienceBarArray = []
-let experience = 2
-let level = 3
+let currentExperienceArray = [2]
+let currentLevelArray = [3]
 
 // Display experience out of 5 status
 
 function renderExperienceText() {
-    experienceText.innerHTML = 'Experience: ' + experience + '/5 ⚡'
-    experienceStatusText.innerHTML = 'Level: ' + level
+    experienceText.innerHTML = 'Experience: ' + currentExperienceArray[0] + '/5 ⚡'
+    experienceStatusText.innerHTML = 'Level: ' + currentLevelArray[0]
 }
 
-renderExperienceText()
+experienceDownButton.addEventListener("click", function() {
+    if (currentExperienceArray[0] === 0 && currentLevelArray[0] === 1) {}
+    else if (currentExperienceArray[0] === 0) {
+            currentExperienceArray.unshift(4)
+            levelDown() 
+            eventLogArray.unshift([1,`Experience changed from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+    } else {
+        currentExperienceArray.unshift(currentExperienceArray[0] - 1)
+        eventLogArray.unshift([1,`Experience decreased from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+    }
+
+    renderAll() 
+})
+
+experienceUpButton.addEventListener("click", function() {
+    if (currentExperienceArray[0] === 4) {
+        currentExperienceArray.unshift(0)
+        levelUp()
+        eventLogArray.unshift([1,`Experience changed from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+
+    } else {
+        currentExperienceArray.unshift(currentExperienceArray[0] + 1)
+        console.log(currentExperienceArray)
+    }
+
+    eventLogArray.unshift()
+
+    renderAll() 
+})
+
+function levelUp() {
+    currentLevelArray.unshift(currentLevelArray[0] + 1)
+    eventLogArray.unshift([8, `Level increased from ${currentLevelArray[1]} to ${currentLevelArray[0]}`])
+}
+
+function levelDown() {
+    currentLevelArray.unshift(currentLevelArray[0] - 1)
+    eventLogArray.unshift([8,`Level decreased from ${currentLevelArray[1]} to ${currentLevelArray[0]} `])
+}
 
 // Function to draw the harm, luck, and experience bars
 
@@ -214,7 +254,7 @@ function renderLuckBar() {
 
 function renderExperienceBar() {
 
-    renderBar(5, experienceBar, experienceBarArray, experience, 'square', 'experience')
+    renderBar(5, experienceBar, experienceBarArray, currentExperienceArray[0], 'square', 'experience')
 
 }
 
@@ -460,6 +500,8 @@ eventLogUndoButton.addEventListener("click", function() {
     } else if (eventLogArray[0][0] === 1) {
         luckBarArray.shift()
         undo(usedLuckArray)
+    } else if (eventLogArray[0][0] === 8) {
+        
     }
 })
 
