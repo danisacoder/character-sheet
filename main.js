@@ -13,7 +13,7 @@ harmEmojiArray = ['🤠','🙂','😐','🙁','🤒','🤕','😱','😵','💀'
 
 function renderHarmText() {
     
-    harmText.innerHTML = `Harm: ${currentHarmArray[0]}/8 ${harmEmojiArray[currentHarmArray[0]]}`
+    harmText.innerHTML = `Harm: ${currentHarmArray[0]}/${harmMax[0]} ${harmEmojiArray[currentHarmArray[0]]}`
 }
 
 // Increment harm up and down with buttons
@@ -54,38 +54,15 @@ harmUpButton.addEventListener("click", function() {
 
 function renderStatusText() {
 
-   if (currentHarmArray[0] > 3 && currentHarmArray[0] < 8) {
+   if (currentHarmArray[0] > 3 && currentHarmArray[0] < harmMax[0]) {
         harmStatusText.innerHTML = 'Status: Unstable'
-    } else if (currentHarmArray[0] === 8) {
+    } else if (currentHarmArray[0] === harmMax[0]) {
         harmStatusText.innerHTML = 'Status: Unconscious'
     } else { 
         harmStatusText.innerHTML = ''
     }
 
 }
-
-// const basicMoveInfoText = document.getElementById('basic-move-info-text')
-
-// const infoArray = [
-//     {
-//         stuff:`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.`,
-//         things: `Choose on extra effect:<br>
-//             <ul>
-//                 <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
-//                 <li>You inflict terrible harm (+1 harm)</li>
-//                 <li>You suffer less harm (-1 harm)</li>
-//                 <li>You force them where you want them</li>
-//             </ul>`
-//     }
-// ]
-
-// function renderinfoArray() {
-//     if (basicMoveArray[0][4] > 7) {
-//         basicMoveInfoText.innerHTML = `${infoArray.butts}`    
-//     } 
-// }
-
-// renderinfoArray()
 
 // Dice and results DOM elements
 
@@ -108,12 +85,12 @@ let usedLuckArray = [1]
 // Display used luck out of 7
 
 function renderLuckText() {
-    luckText.innerHTML = `Used Luck: ${usedLuckArray[0]}/7 🍀`
+    luckText.innerHTML = `Used Luck: ${usedLuckArray[0]}/${luckMax[0]} 🍀`
 }
 
 function renderLuckStatusText() {
 
-    if (usedLuckArray[0] > 6) {
+    if (usedLuckArray[0] > luckMax[0]-1) {
         luckStatusText.innerHTML = 'Doomed'
     } else {
         luckStatusText.innerHTML = ''
@@ -164,7 +141,7 @@ let currentLevelArray = [3]
 // Display experience out of 5 status
 
 function renderExperienceText() {
-    experienceText.innerHTML = 'Experience: ' + currentExperienceArray[0] + '/5 ⚡'
+    experienceText.innerHTML = 'Experience: ' + currentExperienceArray[0] + `/${experienceMax[0]} ⚡`
     experienceStatusText.innerHTML = 'Level: ' + currentLevelArray[0]
 }
 
@@ -173,24 +150,29 @@ experienceDownButton.addEventListener("click", function() {
     else if (currentExperienceArray[0] === 0) {
             currentExperienceArray.unshift(4)
             levelDown() 
-            eventLogArray.unshift([1,`Experience changed from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+            eventLogArray.unshift([8,`Experience changed from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
     } else {
         currentExperienceArray.unshift(currentExperienceArray[0] - 1)
-        eventLogArray.unshift([1,`Experience decreased from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+        eventLogArray.unshift([8,`Experience decreased from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
     }
-
+    // console.log(currentExperienceArray)
+    // console.log(currentLevelArray)
+    // console.log(eventLogArray)
+    console.log(experienceBarArray)
     renderAll() 
 })
 
 experienceUpButton.addEventListener("click", function() {
     if (currentExperienceArray[0] === 4) {
         currentExperienceArray.unshift(0)
+        console.log(currentExperienceArray)
         levelUp()
-        eventLogArray.unshift([1,`Experience changed from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
+        eventLogArray.unshift([8,`Experience increased from 4 to 5, reset to 0`])
 
     } else {
         currentExperienceArray.unshift(currentExperienceArray[0] + 1)
         console.log(currentExperienceArray)
+        eventLogArray.unshift([8, `Experience increased from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
     }
 
     eventLogArray.unshift()
@@ -234,11 +216,17 @@ function renderBar(length, barName, barArray, barFill, barClassName, fillClassNa
 
 }
 
+// max values 
+
+let harmMax = [8]
+let luckMax = [7]
+let experienceMax = [5]
+
 // Create harm bar
 
 function renderHarmBar() {
 
-    renderBar(8, harmBar, harmBarArray, currentHarmArray[0], 'square', 'harm')
+    renderBar(harmMax[0], harmBar, harmBarArray, currentHarmArray[0], 'square', 'harm')
 
 }
 
@@ -246,7 +234,7 @@ function renderHarmBar() {
 
 function renderLuckBar() {
 
-    renderBar(7, luckBar, luckBarArray, usedLuckArray[0], 'square', 'usedLuck', 'green')
+    renderBar(luckMax[0], luckBar, luckBarArray, usedLuckArray[0], 'square', 'usedLuck', 'green')
 
 }
 
@@ -254,7 +242,7 @@ function renderLuckBar() {
 
 function renderExperienceBar() {
 
-    renderBar(5, experienceBar, experienceBarArray, currentExperienceArray[0], 'square', 'experience')
+    renderBar(experienceMax[0], experienceBar, experienceBarArray, currentExperienceArray[0], 'square', 'experience')
 
 }
 
@@ -381,8 +369,10 @@ function renderBasicMoves() {
         // render the results text (large and in charge) on the page
         basicMoveResults.innerHTML = `${basicMoveArray[0][4]}`
 
-    }
 
+
+    }
+    console.log(basicMoveArray)
 }
 
 // Info array for roll-based information
@@ -486,23 +476,47 @@ readABadSituationButton.addEventListener("click", function() {
 
 let eventLogUndoButton = document.getElementById('event-log-undo-button')
 
-eventLogUndoButton.addEventListener("click", function() {
-// undo basic rolls   
-    if (eventLogArray[0][0] === 5) {
-        undo(basicRollArray)
-// undo basic moves
-    } else if (eventLogArray[0][0] === 4) {
-        undo(basicMoveArray)
-// undo harm Bar adjustments
-    } else if (eventLogArray[0][0] === 0) {
-        currentHarmArray.shift()
-        undo(harmBarArray)
-    } else if (eventLogArray[0][0] === 1) {
-        luckBarArray.shift()
-        undo(usedLuckArray)
-    } else if (eventLogArray[0][0] === 8) {
-        
+function renderUndoButton() {
+    if (eventLogArray.length === 0) {
+        eventLogUndoButton.classList.add('hide')
+    } else {
+        eventLogUndoButton.classList.remove('hide')
     }
+}
+
+eventLogUndoButton.addEventListener("click", function() {
+        // undo basic rolls   
+        if (eventLogArray[0][0] === 5) { 
+            undo(basicRollArray)
+        // undo basic moves
+        } else if (eventLogArray[0][0] === 4) {
+            undo(basicMoveArray)
+        // undo harm Bar adjustments
+        } else if (eventLogArray[0][0] === 0) {
+            currentHarmArray.shift()
+            undo(harmBarArray)
+        // undo luck Bar adjustments
+        } else if (eventLogArray[0][0] === 1) {
+            luckBarArray.shift()
+            undo(usedLuckArray)
+        // undo experience and level adjustments
+        } else if (eventLogArray[0][0] === 8) {
+            // how to undo if you just leveled down
+            if (currentExperienceArray[0] === experienceMax[0]-1 && currentLevelArray[0] === (currentLevelArray[1] - 1)) {
+                console.log('hello')
+                undo(currentExperienceArray)
+                undo(currentLevelArray)
+            // how to undo if you just leveled up
+            } else if (currentExperienceArray[1] === 4 && currentLevelArray[0] === (currentLevelArray[1]+1)) {
+                    console.log('goodbye')
+                    undo(currentExperienceArray)
+                    undo(currentLevelArray)
+            // how to undo experience if nothing special happened
+            } else {
+                undo(currentExperienceArray)
+            }
+            
+        }
 })
 
 function undo(array) {
@@ -510,6 +524,31 @@ function undo(array) {
     eventLogArray.shift()
 
     renderAll()
+}
+
+// Rendering the info text
+
+const basicMoveInfoText = document.getElementById('basic-move-info-text')
+
+const infoArray = [
+    { 1:`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
+        Choose one extra effect:<br>
+            <ul>
+                <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
+                <li>You inflict terrible harm (+1 harm)</li>
+                <li>You suffer less harm (-1 harm)</li>
+                <li>You force them where you want them</li>
+            </ul>`
+    }
+]
+
+function renderInfoArray() {
+    if (basicMoveArray.length === 0) {} else {
+        if (basicMoveArray[0][4] > 7) {
+            basicMoveInfoText.innerHTML = `${infoArray[0]['1']}`    
+            console.log(infoArray[0]['1'])
+        } 
+    }
 }
 
 function renderAll() {
@@ -527,6 +566,8 @@ function renderAll() {
     renderLuckBar()
     renderLuckText()
     renderLuckStatusText()
+    renderUndoButton()
+    renderInfoArray()
     
 }
 
@@ -537,3 +578,5 @@ renderAll()
 // function renderBasicMoveDetailText() {
     
 // }
+
+console.log(eventLogArray)

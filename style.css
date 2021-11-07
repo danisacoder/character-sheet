@@ -142,3 +142,7 @@ section {
 .bold {
     font-weight: bold;
 }
+
+.hide {
+    display: none;
+}
