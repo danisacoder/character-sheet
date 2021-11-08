@@ -146,6 +146,10 @@ function renderExperienceText() {
 }
 
 experienceDownButton.addEventListener("click", function() {
+    experienceDown()
+})
+
+function experienceDown() {
     if (currentExperienceArray[0] === 0 && currentLevelArray[0] === 1) {}
     else if (currentExperienceArray[0] === 0) {
             currentExperienceArray.unshift(4)
@@ -155,14 +159,14 @@ experienceDownButton.addEventListener("click", function() {
         currentExperienceArray.unshift(currentExperienceArray[0] - 1)
         eventLogArray.unshift([8,`Experience decreased from ${currentExperienceArray[1]} to ${currentExperienceArray[0]}`])
     }
-    // console.log(currentExperienceArray)
-    // console.log(currentLevelArray)
-    // console.log(eventLogArray)
-    // console.log(experienceBarArray)
     renderAll() 
-})
+}
 
 experienceUpButton.addEventListener("click", function() {
+    experienceUp()
+})
+
+function experienceUp() {
     if (currentExperienceArray[0] === 4) {
         currentExperienceArray.unshift(0)
         // console.log(currentExperienceArray)
@@ -178,7 +182,7 @@ experienceUpButton.addEventListener("click", function() {
     eventLogArray.unshift()
 
     renderAll() 
-})
+}
 
 function levelUp() {
     currentLevelArray.unshift(currentLevelArray[0] + 1)
@@ -525,14 +529,15 @@ function undo(array) {
     renderAll()
 }
 
-// Rendering the info text
+// Rendering the info text about your basic moves
 
 const basicMoveInfoText = document.getElementById('basic-move-info-text')
 
 const infoArray = [
     {'kickSomeAss' : 
         { 
-            '7+':`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the estbalished dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the established dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
             `,
             '10+': `Choose one extra effect:<br>
                         <ul>
@@ -552,6 +557,7 @@ const infoArray = [
     }, 
     {'actUnderPressure' : 
         {
+            '1-6':`You fail. You have gained an experience point.`,
             '7+':`The Keeper is going to give you:<br>
                     <ul>
                         <li>A worse outcome</li>
@@ -562,52 +568,101 @@ const infoArray = [
             '12+': `You may choose to either do what you wanted and something extra, or to do what you wanted to absolute perfection.`
         }
 
+    },
+    {'helpOut' : 
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`Your help grants them +1 to their roll, but you also expose yourself to trouble or danger.`,
+            '10+':`Your help grants them +1 to their roll.`,
+            '+12':`Your help lets them act as if they just rolled a 12, regardless of what they actually got.`
+        }
+
+    },
+    {'investigateAMystery' : 
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`Ask the keeper one of the following questions:<br>
+                <ul>
+                    <li>What happened here?</li>
+                    <li>What sort of creature is it?</li>
+                    <li>What can it do?</li>
+                    <li>What can hurt it?</li>
+                    <li>Where did it go?</li>
+                    <li>What was it going to do?</li>
+                    <li>What is being concealed here?</li>
+                </ul>`,
+            '10+':`Ask the keeper two of the following questions:<br>
+                <ul>
+                    <li>What happened here?</li>
+                    <li>What sort of creature is it?</li>
+                    <li>What can it do?</li>
+                    <li>What can hurt it?</li>
+                    <li>Where did it go?</li>
+                    <li>What was it going to do?</li>
+                    <li>What is being concealed here?</li>
+                </ul>`,
+            '+12':`You may ask the keeper any question you want about the mystery, including the following:<br>
+                <ul>
+                    <li>What happened here?</li>
+                    <li>What sort of creature is it?</li>
+                    <li>What can it do?</li>
+                    <li>What can hurt it?</li>
+                    <li>Where did it go?</li>
+                    <li>What was it going to do?</li>
+                    <li>What is being concealed here?</li>
+                </ul>`
+        }
+
     }
 
 ]
 
+// Shortening basic move type array junk for later use
+let kickSomeAss = infoArray[0]['kickSomeAss']
+let actUnderPressure = infoArray[1]['actUnderPressure']
+let helpOut = infoArray[2]['helpOut']
+let investigateAMystery = infoArray[3]['investigateAMystery']
+// write more
+
 function renderInfoArray() {
 
+    // if there are no moves to render... don't render them
     if (basicMoveArray.length === 0) {} else {
+
     // this is how I can tell the type of move from basicMoveArray
     const type = basicMoveArray[0][0]
    
     // this is how I can get the dice result from basicMoveArray
     const results = basicMoveArray[0][4]
-  
-    // Shortening Kick Some Ass array junk
-    let kickSomeAss = infoArray[0]['kickSomeAss']
-    let actUnderPressure = infoArray[0]['actUnderPressure']
 
+    // send the info through the selector function and spit it out on the page
         if (type === 'Kick Some Ass') {
-            if (results >= 7 && results < 10) {
-                basicMoveInfoText.innerHTML = `${kickSomeAss['7+']}`
-            } else if (results >= 10 && results < 12) {
-                basicMoveInfoText.innerHTML = `${kickSomeAss['10+']}`
-            } else if (results >= 12) {
-                basicMoveInfoText.innerHTML = `${kickSomeAss['12+']}`
-            }   
+            selectCorrectInfoArraySection(results, kickSomeAss)
         } else if (type === 'Act Under Pressure') {
-            if (results >= 7 && results < 10) {
-                basicMoveInfoText.innerHTML = `${actUnderPressure['7+']}`
-            } else if (results >= 10 && results < 12) {
-                basicMoveInfoText.innerHTML = `${actUnderPressure['10+']}`
-            } else if (results >= 12) {
-                basicMoveInfoText.innerHTML = `${actUnderPressure['12+']}`
-                console.log(actUnderPressure)
-            }   
-
+            selectCorrectInfoArraySection(results, actUnderPressure)
+        } else if (type === 'Help Out') {
+            selectCorrectInfoArraySection(results, helpOut)
+        } else if (type === 'Investigate A Mystery') {
+            selectCorrectInfoArraySection(results, investigateAMystery)
         }
-
-    }  
-
-        // if this is an Act Under Pressure move
-
-
-
+    }
 }
 
+// Time to make it DRYer!
 
+function selectCorrectInfoArraySection (results, typeName) {
+    if (results < 7) {
+        basicMoveInfoText.innerHTML = `${typeName['1-6']}`
+    } else if (results >= 7 && results < 10) {
+        basicMoveInfoText.innerHTML = `${typeName['7+']}`
+    } else if (results >= 10 && results < 12) {
+        basicMoveInfoText.innerHTML = `${typeName['10+']}`
+    } else if (results >= 12) {
+        basicMoveInfoText.innerHTML = `${typeName['12+']}`
+    }   
+}
+
+console.log(infoArray[3])
 
 function renderAll() {
 
