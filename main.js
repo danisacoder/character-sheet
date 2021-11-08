@@ -343,6 +343,7 @@ const investigateAMysteryButton = document.getElementById('investigate-a-mystery
 const manipulateSomeoneButton = document.getElementById('manipulate-someone-button')
 const protectSomeoneButton = document.getElementById('protect-someone-button')
 const readABadSituationButton = document.getElementById('read-a-bad-situation-button')
+const useMagicButton = document.getElementById('use-magic-button')
 
 // Basic move dice roll functions
 
@@ -477,6 +478,15 @@ readABadSituationButton.addEventListener("click", function() {
     renderAll()
 })
 
+useMagicButton.addEventListener("click", function () {
+
+     // make a basic roll using the Kick Some Ass parameters and record it in the array
+     basicMoveArray.unshift(basicRoll('Use Magic', weird, 'Weird'))
+
+     pushBasicActionToArray()
+     renderAll()
+})
+
 let eventLogUndoButton = document.getElementById('event-log-undo-button')
 
 function renderUndoButton() {
@@ -574,7 +584,7 @@ const infoArray = [
             '1-6':`You fail. You have gained an experience point.`,
             '7+':`Your help grants them +1 to their roll, but you also expose yourself to trouble or danger.`,
             '10+':`Your help grants them +1 to their roll.`,
-            '+12':`Your help lets them act as if they just rolled a 12, regardless of what they actually got.`
+            '12+':`Your help lets them act as if they just rolled a 12, regardless of what they actually got.`
         }
 
     },
@@ -601,7 +611,7 @@ const infoArray = [
                     <li>What was it going to do?</li>
                     <li>What is being concealed here?</li>
                 </ul>`,
-            '+12':`You may ask the keeper any question you want about the mystery, including the following:<br>
+            '12':`You may ask the keeper any question you want about the mystery, including the following:<br>
                 <ul>
                     <li>What happened here?</li>
                     <li>What sort of creature is it?</li>
@@ -610,6 +620,114 @@ const infoArray = [
                     <li>Where did it go?</li>
                     <li>What was it going to do?</li>
                     <li>What is being concealed here?</li>
+                </ul>`
+        }
+    }, 
+    {'manipulateSomeone' : 
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`They'll do it, but only if you do something for them right now to show you mean it. If you asked too much, they'll tell you what, if anything, it would take for them to do it.`,
+            '10+':`They'll do it for the reason you gave them. If you asked too much, they'll tell you the minimum it would take for them to do it (or if there's no way they'd do it).`,
+            '12+':`Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
+        }
+
+    },
+    {'protectSomeone' :
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`You protect them okay, but you'll suffer some or all of the harm they were going to get.`,
+            '10+':`Choose an extra:<br>
+                <ul>
+                    <li>You suffer little harm (-1 harm).</li>
+                    <li>All impending danger is now focused on you.</li>
+                    <li>You inflict harm on the enemy.</li>
+                    <li>You hold the enemy back.</li>
+                </ul>`,
+            '12+':`Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
+        }
+        
+    },
+    {'readABadSituation' :
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`Ask the keeper one of the following questions:<br>
+                <ul>
+                    <li>What's my best way in?</li>
+                    <li>What's my best way out?</li>
+                    <li>Are there any dangers we haven't noticed?</li>
+                    <li>What's the biggest threat?</li>
+                    <li>What's most vulnerable to me?</li>
+                    <li>What's the best way to protect the victims?</li>
+                </ul>`,
+            '10+':`Ask the keeper three of the following questions:<br>
+                <ul>
+                    <li>What's my best way in?</li>
+                    <li>What's my best way out?</li>
+                    <li>Are there any dangers we haven't noticed?</li>
+                    <li>What's the biggest threat?</li>
+                    <li>What's most vulnerable to me?</li>
+                    <li>What's the best way to protect the victims?</li>
+                </ul>`,
+            '12+':`You may ask the keeper any question you want about the mystery, including the following:<br>
+            <ul>
+                <li>What's my best way in?</li>
+                <li>What's my best way out?</li>
+                <li>Are there any dangers we haven't noticed?</li>
+                <li>What's the biggest threat?</li>
+                <li>What's most vulnerable to me?</li>
+                <li>What's the best way to protect the victims?</li>
+            </ul>`
+        }
+    },
+    {'useMagic' :
+        {
+            '1-6':`You fail. You have gained an experience point.`,
+            '7+':`It works imperfectly: choose your effect and a glitch. The keeper will decide what effect the the glitch has. Choose your effect:<br>
+                <ul>
+                    <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
+                    <li>Enchant a weapon. It gets +1 harm and +magic.</li>
+                    <li>Do one thing that is beyond human limitations.</li>
+                    <li>Bar a place or portal to a specific person or type of creature.</li>
+                    <li>Trap a specific person, minion, or monster.</li>
+                    <li>Banish a spirit or curse from the person, object, or place it inhabits.</li>
+                    <li>Summon a monster into the world.</li>
+                    <li>Communicate with something that you do not share a language with.</li>
+                    <li>Observe another place or time.</li>
+                    <li>Heal 1 harm from an injury, or cure a disease, or neutralize a poison.</li>
+                </ul>
+            Choose your glitch:<br>
+                <ul>
+                    <li>The effect is weakened.</li>
+                    <li>The effect is of short duration.</li>
+                    <li>You take 1 harm, ignore armour.</li>
+                    <li>The magic draws immediate, unwelcome attention.</li>
+                    <li>It has a problematic side effect.</li>
+                </ul>`,
+            '10+':`The magic works without issues: choose your effect:<br>
+                <ul>
+                    <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
+                    <li>Enchant a weapon. It gets +1 harm and +magic.</li>
+                    <li>Do one thing that is beyond human limitations.</li>
+                    <li>Bar a place or portal to a specific person or type of creature.</li>
+                    <li>Trap a specific person, minion, or monster.</li>
+                    <li>Banish a spirit or curse from the person, object, or place it inhabits.</li>
+                    <li>Summon a monster into the world.</li>
+                    <li>Communicate with something that you do not share a language with.</li>
+                    <li>Observe another place or time.</li>
+                    <li>Heal 1 harm from an injury, or cure a disease, or neutralize a poison.</li>
+                </ul>`,
+            '12+':`The Keeper will offer you some added benefit. Choose your effect:<br>
+                <ul>
+                    <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
+                    <li>Enchant a weapon. It gets +1 harm and +magic.</li>
+                    <li>Do one thing that is beyond human limitations.</li>
+                    <li>Bar a place or portal to a specific person or type of creature.</li>
+                    <li>Trap a specific person, minion, or monster.</li>
+                    <li>Banish a spirit or curse from the person, object, or place it inhabits.</li>
+                    <li>Summon a monster into the world.</li>
+                    <li>Communicate with something that you do not share a language with.</li>
+                    <li>Observe another place or time.</li>
+                    <li>Heal 1 harm from an injury, or cure a disease, or neutralize a poison.</li>
                 </ul>`
         }
 
@@ -622,7 +740,10 @@ let kickSomeAss = infoArray[0]['kickSomeAss']
 let actUnderPressure = infoArray[1]['actUnderPressure']
 let helpOut = infoArray[2]['helpOut']
 let investigateAMystery = infoArray[3]['investigateAMystery']
-// write more
+let manipulateSomeone = infoArray[4]['manipulateSomeone']
+let protectSomeone = infoArray[5]['protectSomeone']
+let readABadSituation = infoArray[6]['readABadSituation']
+let useMagic = infoArray[7]['useMagic']
 
 function renderInfoArray() {
 
@@ -644,7 +765,15 @@ function renderInfoArray() {
             selectCorrectInfoArraySection(results, helpOut)
         } else if (type === 'Investigate A Mystery') {
             selectCorrectInfoArraySection(results, investigateAMystery)
-        }
+        } else if (type === 'Manipulate Someone') {
+            selectCorrectInfoArraySection(results, manipulateSomeone)
+        } else if (type === 'Protect Someone') {
+            selectCorrectInfoArraySection(results, protectSomeone)  
+        } else if (type === 'Read A Bad Situation') {
+            selectCorrectInfoArraySection(results, readABadSituation)       
+        } else if (type === 'Use Magic') {
+            selectCorrectInfoArraySection(results, useMagic)       
+        } 
     }
 }
 
