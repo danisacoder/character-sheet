@@ -7,7 +7,7 @@ const harmText = document.getElementById('harm-text')
 let harmBarArray = []
 let currentHarmArray = [4]
 
-let class = 'The Monstrous'
+let hunterType = 'The Monstrous'
 
 // Display number of harm out of 8 - need an additional emoji here
 
@@ -741,7 +741,7 @@ const monstrousMovesArray = [
 
             ['Immortal','You do not age or sicken, and whenever you suffer harm you suffer 1 harm less.',1],
             ['Unnatural Appeal','Roll +Weird instead of +Charm when you manipulate someone.', 0],
-            ['Unholy Strength','Roll +Weird instead of +Tough when you kick some ass.',0],
+            ['Unholy Strength','Roll +Weird instead of +Tough when you kick some ass.',1],
             ['Incorporeal','You may move freely through solid objects (but not people).',0],
             ['Preternatural Speed','You go much faster than normal people. When you chase, flee, or run take +1 ongoing.',0],
             ['Claws of the Beast','All your natural attacks get +1 harm.',0],
@@ -753,23 +753,27 @@ const monstrousMovesArray = [
             ['Something Borrowed','Take a move from a hunter playbook that is not currently in play.',0]
 ]
 
+const inventory = []
+
 // console.log(monstrousMovesArray)
 
 let movesList = document.getElementById('moves-list')
 
+function renderMoves() {
 
+    movesList.innerHTML = ''
 
+    if (hunterType === 'The Monstrous') {
+        selectMoveSet(monstrousMovesArray) 
+    }
 
-function renderMoves(moveTypeArray) { 
+}
 
+function selectMoveSet(moveTypeArray) { 
 
-
-    if (class === 'The Monstrous') {
-        selectCorrectInfoArraySection(results, kickSomeAss)    
-
-    for (let i=0; i<moveTypeArray.length;i++) {
+    for (let i=0; i<moveTypeArray.length; i++) {
         if (moveTypeArray[i][2] === 1) {
-            
+            movesList.innerHTML += `<li><b>${moveTypeArray[i][0]}</b>: ${moveTypeArray[i][1]}</li>`
         } 
     }
 }
