@@ -7,6 +7,8 @@ const harmText = document.getElementById('harm-text')
 let harmBarArray = []
 let currentHarmArray = [4]
 
+let class = 'The Monstrous'
+
 // Display number of harm out of 8 - need an additional emoji here
 
 harmEmojiArray = ['🤠','🙂','😐','🙁','🤒','🤕','😱','😵','💀']
@@ -57,7 +59,7 @@ function renderStatusText() {
    if (currentHarmArray[0] > 3 && currentHarmArray[0] < harmMax[0]) {
         harmStatusText.innerHTML = 'Status: Unstable'
     } else if (currentHarmArray[0] === harmMax[0]) {
-        harmStatusText.innerHTML = 'Status: Unconscious'
+        harmStatusText.innerHTML = 'Status: Dead'
     } else { 
         harmStatusText.innerHTML = ''
     }
@@ -735,6 +737,43 @@ const infoArray = [
 
 ]
 
+const monstrousMovesArray = [
+
+            ['Immortal','You do not age or sicken, and whenever you suffer harm you suffer 1 harm less.',1],
+            ['Unnatural Appeal','Roll +Weird instead of +Charm when you manipulate someone.', 0],
+            ['Unholy Strength','Roll +Weird instead of +Tough when you kick some ass.',0],
+            ['Incorporeal','You may move freely through solid objects (but not people).',0],
+            ['Preternatural Speed','You go much faster than normal people. When you chase, flee, or run take +1 ongoing.',0],
+            ['Claws of the Beast','All your natural attacks get +1 harm.',0],
+            ['Mental Dominion',"When you gaze into a normal human's eyes and exert your will over them, roll +Charm. On a 10+, hold 3. On a 7-9, hold 1. You may spend y our hold to give them an order. Regular people will follow your order, whatever it is. Hunter can choose whether they do it or not. If they do, they mark experience.",0],
+            ['Unquenchable Vitality','When you have taken harm, you can heal yourself. Roll +Cool. On a 10+, heal 2 harm and stabilize your injuries. On a 7-9, heal 1 harm and stabilize your injuries. On a miss, your injuries worsen.',0],
+            ['Dark Negotiator','You can use the manipulate someone move on monsters as well as people, if they can reason and talk.',0], 
+            ['Flight','You can fly.',0],
+            ['Shapeshifter',"You may change your form (usually into an animal). Decide if you have just one alternate form or several, and detail them. You gain +1 to investigate a mystery when using an alternate form's superior senses (e.g. smell for a wolf, sight for an eagle.)",0],
+            ['Something Borrowed','Take a move from a hunter playbook that is not currently in play.',0]
+]
+
+// console.log(monstrousMovesArray)
+
+let movesList = document.getElementById('moves-list')
+
+
+
+
+function renderMoves(moveTypeArray) { 
+
+
+
+    if (class === 'The Monstrous') {
+        selectCorrectInfoArraySection(results, kickSomeAss)    
+
+    for (let i=0; i<moveTypeArray.length;i++) {
+        if (moveTypeArray[i][2] === 1) {
+            
+        } 
+    }
+}
+
 // Shortening basic move type array junk for later use
 let kickSomeAss = infoArray[0]['kickSomeAss']
 let actUnderPressure = infoArray[1]['actUnderPressure']
@@ -810,6 +849,7 @@ function renderAll() {
     renderLuckStatusText()
     renderUndoButton()
     renderInfoArray()
+    renderMoves()
     
 }
 
