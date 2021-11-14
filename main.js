@@ -254,27 +254,27 @@ function renderExperienceBar() {
 
 // Ratings variables/DOM elements
 
-let charm = -1
-let cool = 1
-let sharp = 1
-let tough = 0
-let weird = 3
+let charmArray = [-1]
+let coolArray = [1]
+let sharpArray = [1]
+let toughArray = [0]
+let weirdArray = [3]
 
-const charmText = document.getElementById('charm')
-const coolText = document.getElementById('cool')
-const sharpText = document.getElementById('sharp')
-const toughText = document.getElementById('tough')
-const weirdText = document.getElementById('weird')
+const charmText = document.getElementById('charm-section')
+const coolText = document.getElementById('cool-section')
+const sharpText = document.getElementById('sharp-section')
+const toughText = document.getElementById('tough-section')
+const weirdText = document.getElementById('weird-section')
 
 // Show the ratings on the page
 
 function renderRatingsText() {
 
-    charmText.textContent = `Charm: ${charm}`
-    coolText.textContent = `Cool: ${cool}`
-    sharpText.textContent = `Sharp: ${sharp}`
-    toughText.textContent = `Tough: ${tough}`
-    weirdText.textContent = `Weird: ${weird}`
+    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm" contenteditable="true">${charmArray[0]}</span><h3>`
+    coolText.innerHTML = `<h3 id="cool-section">Cool: <span id="cool" contenteditable="true">${coolArray[0]}</span><h3>`
+    sharpText.innerHTML = `<h3 id="sharp-section">Sharp: <span id="sharp" contenteditable="true">${sharpArray[0]}</span><h3>`
+    toughText.innerHTML = `<h3 id="tough-section">Tough: <span id="tough" contenteditable="true">${toughArray[0]}</span><h3>`
+    weirdText.innerHTML = `<h3 id="weird-section">Weird: <span id="weird" contenteditable="true">${weirdArray[0]}</span><h3>`
     
 }
 
@@ -420,7 +420,7 @@ function pushBasicActionToArray() {
 kickSomeAssButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Kick Some Ass', tough, 'Tough'))
+    basicMoveArray.unshift(basicRoll('Kick Some Ass', toughArray[0], 'Tough'))
     // console.log(basicMoveArray)
     pushBasicActionToArray()
     renderAll()
@@ -429,7 +429,7 @@ kickSomeAssButton.addEventListener("click", function() {
 actUnderPressureButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Act Under Pressure', cool, 'Cool'))
+    basicMoveArray.unshift(basicRoll('Act Under Pressure', coolArray[0], 'Cool'))
 
     pushBasicActionToArray()
     renderAll()
@@ -438,7 +438,7 @@ actUnderPressureButton.addEventListener("click", function() {
 helpOutButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Help Out', cool, 'Cool'))
+    basicMoveArray.unshift(basicRoll('Help Out', coolArray[0], 'Cool'))
 
     pushBasicActionToArray()
     renderAll()
@@ -447,7 +447,7 @@ helpOutButton.addEventListener("click", function() {
 investigateAMysteryButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Invesetigate A Mystery', sharp, 'Sharp'))
+    basicMoveArray.unshift(basicRoll('Invesetigate A Mystery', sharpArray[0], 'Sharp'))
 
     pushBasicActionToArray()
     renderAll()
@@ -456,7 +456,7 @@ investigateAMysteryButton.addEventListener("click", function() {
 manipulateSomeoneButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Manipulate Someone', charm, 'Charm'))
+    basicMoveArray.unshift(basicRoll('Manipulate Someone', charmArray[0], 'Charm'))
 
     pushBasicActionToArray()
     renderAll()
@@ -465,7 +465,7 @@ manipulateSomeoneButton.addEventListener("click", function() {
 protectSomeoneButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Protect Someone', tough, 'Tough'))
+    basicMoveArray.unshift(basicRoll('Protect Someone', toughArray[0], 'Tough'))
 
     pushBasicActionToArray()
     renderAll()
@@ -474,7 +474,7 @@ protectSomeoneButton.addEventListener("click", function() {
 readABadSituationButton.addEventListener("click", function() {
 
     // make a basic roll using the Kick Some Ass parameters and record it in the array
-    basicMoveArray.unshift(basicRoll('Read A Bad Situation', sharp, 'Sharp'))
+    basicMoveArray.unshift(basicRoll('Read A Bad Situation', sharpArray[0], 'Sharp'))
 
     pushBasicActionToArray()
     renderAll()
@@ -483,11 +483,13 @@ readABadSituationButton.addEventListener("click", function() {
 useMagicButton.addEventListener("click", function () {
 
      // make a basic roll using the Kick Some Ass parameters and record it in the array
-     basicMoveArray.unshift(basicRoll('Use Magic', weird, 'Weird'))
+     basicMoveArray.unshift(basicRoll('Use Magic', weirdArray[0], 'Weird'))
 
      pushBasicActionToArray()
      renderAll()
 })
+
+// Setting up the undo button
 
 let eventLogUndoButton = document.getElementById('event-log-undo-button')
 
@@ -834,7 +836,7 @@ function selectCorrectInfoArraySection (results, typeName) {
     }   
 }
 
-console.log(infoArray[3])
+// console.log(infoArray[3])
 
 function renderAll() {
 
