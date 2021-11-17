@@ -36,7 +36,7 @@ header {
     text-align: center;
     /* grid layout */
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 33% auto auto;
     /* grid-template-rows: 100px 300px;  */
     grid-template-areas: 
         /* 'header header header' */
@@ -59,7 +59,6 @@ section {
     grid-area: harm;
 }
 
-
 .luck-section {
     grid-area: luck;
 }
@@ -74,29 +73,32 @@ section {
 
 .basic-move-section {
     grid-area: basic;
-
+    /* width: 66%;  */
 }
 
 .basic-move-container {
-    display: grid;
-    grid-gap: 10px;
+    display: flex;
+    flex-direction: row;
+
+    /* grid-gap: 10px;
     padding: 15px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; */
 }
 
-/* .basic-move-buttons {
-    grid-area: basic-buttons;
-} */
-
-.basic-move-info {
-    
+.basic-move-buttons {
+    /* grid-area: basic-buttons; */
+    width: 50%;
 }
 
-.basic-move-section > button {
+.basic-move-info-section {
+    width: 50%;
+}
+
+/* .basic-move-section > button {
     width: 200px;
     padding: 10px;
 
-}
+} */
 
 .dice-section {
     grid-area: dice;
@@ -118,7 +120,9 @@ section {
     grid-area: inventory;
 }
 
-
+.editable-text {
+    display: inline;
+}
 
 
 

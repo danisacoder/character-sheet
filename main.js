@@ -270,24 +270,23 @@ const weirdText = document.getElementById('weird-section')
 
 function renderRatingsText() {
 
-    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm">${charmArray[0]}</span><h3>`
-    coolText.innerHTML = `<h3 id="cool-section">Cool: <span id="cool" contenteditable="true">${coolArray[0]}</span><h3>`
-    sharpText.innerHTML = `<h3 id="sharp-section">Sharp: <span id="sharp" contenteditable="true">${sharpArray[0]}</span><h3>`
-    toughText.innerHTML = `<h3 id="tough-section">Tough: <span id="tough" contenteditable="true">${toughArray[0]}</span><h3>`
-    weirdText.innerHTML = `<h3 id="weird-section">Weird: <span id="weird" contenteditable="true">${weirdArray[0]}</span><h3>`
+    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm" size="10">${charmArray[0]}</span></h3>`
+    coolText.innerHTML = `<h3 id="cool-section">Cool: <span id="cool">${coolArray[0]}</span><h3>`
+    sharpText.innerHTML = `<h3 id="sharp-section">Sharp: <span id="sharp">${sharpArray[0]}</span><h3>`
+    toughText.innerHTML = `<h3 id="tough-section">Tough: <span id="tough">${toughArray[0]}</span><h3>`
+    weirdText.innerHTML = `<h3 id="weird-section">Weird: <span id="weird">${weirdArray[0]}</span><h3>`
     
 }
 
 charmText.addEventListener('dblclick', function() {
     // console.log('hello')
 
-    // remove text from DOM
-    charmText.innerHTML = 'Charm:'
-
     // put in an input field with the rating number already in it and selected
-    charmText.innerHTML += `<input type="number" defaultValue="${charmArray[0]}"></input>`
+    charmText.innerHTML = `<h3>Charm:</h3><input type="text" size="1" class="editable-text" value="${charmArray[0]}"></input>`
 
     // once you click elsewhere or press enter, take the entered text, 1. save it to the array, 2. turn input back into text, 3. render the array entry, 4. log the event
+
+    // escape to cancel
 })
 
 renderRatingsText()
