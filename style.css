@@ -36,7 +36,7 @@ header {
     text-align: center;
     /* grid layout */
     display: grid;
-    grid-template-columns: 33% auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     /* grid-template-rows: 100px 300px;  */
     grid-template-areas: 
         /* 'header header header' */
@@ -77,9 +77,16 @@ section {
 }
 
 .basic-move-container {
+    /* height: 100%; */
+    min-height: 0;
     display: flex;
     flex-direction: row;
+    /* align-items: baseline; */
+    /* height: 100%; */
 
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    /* grid-template-rows: 1fr min-content; */
     /* grid-gap: 10px;
     padding: 15px;
     grid-template-columns: 1fr 1fr; */
@@ -88,10 +95,12 @@ section {
 .basic-move-buttons {
     /* grid-area: basic-buttons; */
     width: 50%;
+    /* flex: .5; */
 }
 
 .basic-move-info-section {
     width: 50%;
+    /* flex: 1; */
 }
 
 /* .basic-move-section > button {
