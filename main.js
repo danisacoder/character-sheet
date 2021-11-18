@@ -282,44 +282,43 @@ function renderRatingsText() {
     
 }
 
+
+
 charmText.addEventListener('dblclick', function() {
         // put in an input field with the rating number already in it and selected
         charmText.innerHTML = `<h3>Charm:<input type="text" id="charm-editable-text" size="1" value="${charmArray[0]}"></input></h3>`
 
         // define a variable for this new class
         let charmEventText = document.getElementById('charm-editable-text')
-
         // put focus inside the text box
         charmEventText.focus()
-
         // select the text in the box so you can immediately start typing
         charmEventText.select()
 
         function renderRating() {
+
             // convert the string values to numbers
             let results = parseInt(charmEventText.value, 10) 
-            // save the resulting number the user entered into the array
+            // if it's the same as before, do nothing
+            if (results === charmArray[0]) {} 
+            else {
+            // save the entered number into the array
             charmArray.unshift(results)
-            // push the changes to the event log
+            // push the changes to the event log with identifier 10
             eventLogArray.unshift([10,`Ratings: Charm adjusted from ${charmArray[1]} to ${charmArray[0]}`])
             console.log(charmArray)
             // render the new number as h3
-            renderAll()
-            // console.log(eventLogArray)
+            renderAll() 
+            }
         }
-
         // if the user deselects the input box, save it to the new array
         charmEventText.addEventListener('blur', function() {
             renderRating()
         })
-
         // detect if the user presses enter while in the text box 
         // if charmEventText.addEventListener('keydown', (e) {
             // renderRating()
         // })
-
-
-
 })
 
 
