@@ -260,6 +260,8 @@ let sharpArray = [1]
 let toughArray = [0]
 let weirdArray = [3]
 
+
+
 const charmText = document.getElementById('charm-section')
 const coolText = document.getElementById('cool-section')
 const sharpText = document.getElementById('sharp-section')
@@ -293,23 +295,29 @@ charmText.addEventListener('dblclick', function() {
         // select the text in the box so you can immediately start typing
         charmEventText.select()
 
-        // if the user deselects the input box, save it to the new array
-        charmEventText.addEventListener('blur', function() {
-
-            // convert the string numbers to values
-            
-            // save the new text the user entered into the array
-            charmArray.unshift(charmEventText.value)
+        function renderRating() {
+            // convert the string values to numbers
+            let results = parseInt(charmEventText.value, 10) 
+            // save the resulting number the user entered into the array
+            charmArray.unshift(results)
+            // push the changes to the event log
+            eventLogArray.unshift([10,`Ratings: Charm adjusted from ${charmArray[1]} to ${charmArray[0]}`])
             console.log(charmArray)
             // render the new number as h3
-            renderRatingsText()
+            renderAll()
+            // console.log(eventLogArray)
+        }
+
+        // if the user deselects the input box, save it to the new array
+        charmEventText.addEventListener('blur', function() {
+            renderRating()
         })
 
         // detect if the user presses enter while in the text box 
         // if charmEventText.addEventListener('keydown', (e) {
-            
+            // renderRating()
         // })
-        // save it to the new array
+
 
 
 })
@@ -443,6 +451,7 @@ function renderEventLog() {
             eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
         }
     }
+    console.log(eventLogArray)
 }
 
 
@@ -568,7 +577,9 @@ eventLogUndoButton.addEventListener("click", function() {
             } else {
                 undo(currentExperienceArray)
             }
-            
+                // undo ratings changes
+        } else if (eventLogArray[0][0] === 10) {
+            undo(charmArray)    
         }
 })
 
