@@ -295,6 +295,9 @@ charmText.addEventListener('dblclick', function() {
 
         // if the user deselects the input box, save it to the new array
         charmEventText.addEventListener('blur', function() {
+
+            // convert the string numbers to values
+            
             // save the new text the user entered into the array
             charmArray.unshift(charmEventText.value)
             console.log(charmArray)
