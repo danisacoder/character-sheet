@@ -130,7 +130,8 @@ section {
 }
 
 .editable-text {
-    display: inline;
+    /* display: inline; */
+
 }
 
 

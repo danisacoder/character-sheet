@@ -266,11 +266,13 @@ const sharpText = document.getElementById('sharp-section')
 const toughText = document.getElementById('tough-section')
 const weirdText = document.getElementById('weird-section')
 
+
+
 // Show the ratings on the page
 
 function renderRatingsText() {
 
-    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm" size="10">${charmArray[0]}</span></h3>`
+    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm">${charmArray[0]}</span></h3>`
     coolText.innerHTML = `<h3 id="cool-section">Cool: <span id="cool">${coolArray[0]}</span><h3>`
     sharpText.innerHTML = `<h3 id="sharp-section">Sharp: <span id="sharp">${sharpArray[0]}</span><h3>`
     toughText.innerHTML = `<h3 id="tough-section">Tough: <span id="tough">${toughArray[0]}</span><h3>`
@@ -279,17 +281,37 @@ function renderRatingsText() {
 }
 
 charmText.addEventListener('dblclick', function() {
-    // console.log('hello')
+        // put in an input field with the rating number already in it and selected
+        charmText.innerHTML = `<h3>Charm:<input type="text" id="charm-editable-text" size="1" value="${charmArray[0]}"></input></h3>`
 
-    // put in an input field with the rating number already in it and selected
-    charmText.innerHTML = `<h3>Charm:</h3><input type="text" size="1" class="editable-text" value="${charmArray[0]}"></input>`
+        // define a variable for this new class
+        let charmEventText = document.getElementById('charm-editable-text')
 
-    // once you click elsewhere or press enter, take the entered text, 1. save it to the array, 2. turn input back into text, 3. render the array entry, 4. log the event
+        // put focus inside the text box
+        charmEventText.focus()
 
-    // escape to cancel
+        // select the text in the box so you can immediately start typing
+        charmEventText.select()
+
+        // if the user deselects the input box, save it to the new array
+        charmEventText.addEventListener('blur', function() {
+            // save the new text the user entered into the array
+            charmArray.unshift(charmEventText.value)
+            console.log(charmArray)
+            // render the new number as h3
+            renderRatingsText()
+        })
+
+        // detect if the user presses enter while in the text box 
+        // if charmEventText.addEventListener('keydown', (e) {
+            
+        // })
+        // save it to the new array
+
+
 })
 
-renderRatingsText()
+
 
 // Basic 2d6 dice roller
 
