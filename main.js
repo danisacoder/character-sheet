@@ -260,7 +260,7 @@ let sharpArray = [1]
 let toughArray = [0]
 let weirdArray = [3]
 
-
+// ratingsArray = []
 
 const charmText = document.getElementById('charm-section')
 const coolText = document.getElementById('cool-section')
@@ -269,24 +269,51 @@ const toughText = document.getElementById('tough-section')
 const weirdText = document.getElementById('weird-section')
 
 
+const editableText = document.querySelectorAll(".editable-text")
+
+console.log(charmText)
 
 // Show the ratings on the page
 
 function renderRatingsText() {
 
-    charmText.innerHTML = `<h3 id="charm-section">Charm: <span id="charm">${charmArray[0]}</span></h3>`
-    coolText.innerHTML = `<h3 id="cool-section">Cool: <span id="cool">${coolArray[0]}</span><h3>`
-    sharpText.innerHTML = `<h3 id="sharp-section">Sharp: <span id="sharp">${sharpArray[0]}</span><h3>`
-    toughText.innerHTML = `<h3 id="tough-section">Tough: <span id="tough">${toughArray[0]}</span><h3>`
-    weirdText.innerHTML = `<h3 id="weird-section">Weird: <span id="weird">${weirdArray[0]}</span><h3>`
+    charmText.innerHTML = `Charm: <span id="charm">${charmArray[0]}</span>`
+    coolText.innerHTML = `Cool: <span id="cool">${coolArray[0]}</span>`
+    sharpText.innerHTML = `Sharp: <span id="sharp">${sharpArray[0]}</span>`
+    toughText.innerHTML = `Tough: <span id="tough">${toughArray[0]}</span>S`
+    weirdText.innerHTML = `Weird: <span id="weird">${weirdArray[0]}</span>`
     
 }
 
+// Note to self - this does correctly identify the clicked item using the querySelectorAll approach
 
+// function findClickedEditableText() {
+//     for (let i=0; i<editableText.length; i++) {
+//         editableText[i].addEventListener('dblclick', function() {
+//             console.log(editableText[i])
+//         }
+//     )}
+// }
+
+// findClickedEditableText() 
 
 charmText.addEventListener('dblclick', function() {
+        // identify the clicked text
+        let ratingSpan = document.getElementById('charm')
+        // blank the span out
+        ratingSpan.innerHTML = ''
         // put in an input field with the rating number already in it and selected
-        charmText.innerHTML = `<h3>Charm:<input type="text" id="charm-editable-text" size="1" value="${charmArray[0]}"></input></h3>`
+        let input = document.createElement('input')
+        let startValue = document.createTextNode(`${charmArray[0]}`)
+        document.getElementsByTagName("input")[0].setAttribute("id", "charm-editable-text")
+        document.getElementsByTagName("input")[0].setAttribute("type", "text")
+        document.getElementsByTagName("input")[0].setAttribute("size", "1")
+        document.getElementsByTagName("input")[0].setAttribute("value", `${charmArray[0]}`)
+        charmText.appendChild(input)
+
+        console.log(charmText)
+
+        // charmText.innerHTML = `Charm:<input type="text" id="charm-editable-text" size="1" value="${charmArray[0]}"></input></h3>`
 
         // define a variable for this new class
         let charmEventText = document.getElementById('charm-editable-text')
@@ -907,10 +934,5 @@ function renderAll() {
 
 renderAll()
 
-// const basicMoveDetails = document.getElementById('basic-move-details')
-
-// function renderBasicMoveDetailText() {
-    
-// }
 
 
