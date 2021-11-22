@@ -1,7 +1,31 @@
+body {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
 header {
     text-align: center;
     border: 1px solid red;
     grid-area: header;
+}
+
+nav ul {
+    display: flex;
+
+}
+
+nav li {
+    list-style-type: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .6rem;
 }
 
 .square {
@@ -135,9 +159,6 @@ section {
 }
 
 
-
-
-
 /* Making the event log text */
 
 .event-log {
@@ -159,4 +180,18 @@ section {
 
 .hide {
     display: none;
+}
+
+.event-log-btn {
+    border: solid 1px black;
+    padding: 10px;
+    background-color: #D3D3D3;
+    color: black;
+    user-select: none;
+}
+
+.event-log-btn:focus,
+.event-log-btn:active {
+    background-color: black;
+    color: white;
 }

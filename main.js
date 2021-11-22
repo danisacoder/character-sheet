@@ -560,6 +560,14 @@ useMagicButton.addEventListener("click", function () {
      renderAll()
 })
 
+// Setting up the Event Log hide toggle button
+let eventLogBtn = document.querySelector('.event-log-btn')
+let logSection = document.querySelector('.log-section')
+
+eventLogBtn.addEventListener('click', function() {
+    logSection.classList.toggle('hide')
+})
+
 // Setting up the undo button
 
 let eventLogUndoButton = document.getElementById('event-log-undo-button')
@@ -571,6 +579,7 @@ function renderUndoButton() {
         eventLogUndoButton.classList.remove('hide')
     }
 }
+
 
 eventLogUndoButton.addEventListener("click", function() {
         // undo basic rolls   
