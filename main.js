@@ -837,8 +837,6 @@ const monstrousMovesArray = [
             ['Something Borrowed','Take a move from a hunter playbook that is not currently in play.',0]
 ]
 
-const inventory = []
-
 // console.log(monstrousMovesArray)
 
 let movesList = document.getElementById('moves-list')
@@ -851,16 +849,25 @@ function renderMoves() {
         selectMoveSet(monstrousMovesArray) 
     }
 
-}
+    function selectMoveSet(moveTypeArray) { 
 
-function selectMoveSet(moveTypeArray) { 
-
-    for (let i=0; i<moveTypeArray.length; i++) {
-        if (moveTypeArray[i][2] === 1) {
-            movesList.innerHTML += `<li><b>${moveTypeArray[i][0]}</b>: ${moveTypeArray[i][1]}</li>`
-        } 
+        for (let i=0; i<moveTypeArray.length; i++) {
+    
+            let moveName = moveTypeArray[i][0]
+            let moveText = moveTypeArray[i][1]
+            let moveActive = moveTypeArray[i][2]
+    
+    
+            if (moveActive) {
+                movesList.innerHTML += `<li><strong>${moveName}</strong>: ${moveText}</li>`
+            } 
+        }
     }
+
 }
+
+// Now let's make some inventory
+const inventory = []
 
 // Shortening basic move type array junk for later use
 let kickSomeAss = infoArray[0]['kickSomeAss']

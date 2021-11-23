@@ -80,7 +80,7 @@ nav li {
         /* 'header header header' */
         'harm luck experience'
         'ratings basic basic'
-        'dice abilities inventory'
+        'dice moves inventory'
         'log log log';
     grid-gap: 10px;
     background-color: lightskyblue;
@@ -155,8 +155,10 @@ section {
     grid-area: info;
 }
 
-.abilities-section {
-    grid-area: abilities;
+.moves-list {
+    grid-area: moves;
+    list-style: none;
+
 }
 
 .log-section {
