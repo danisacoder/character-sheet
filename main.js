@@ -632,17 +632,17 @@ const basicMoveInfoText = document.getElementById('basic-move-info-text')
 const infoArray = [
     {'kickSomeAss' : 
         { 
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`You and whatever you're fighting inflict harm on the other. The amount of harm is based on the established dangers in the game. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
+            '1-6':`<strong>Total Failure.</strong> Whatever you're fighting inflicts harm on you - GM determines how much. You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> You and whatever you're fighting each inflict harm on the other - GM determines how much. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you.<br><br>
             `,
-            '10+': `Choose one extra effect:<br>
+            '10+': `<strong>Success.</strong> You and whatever you're fighting each inflict harm on the other - GM determines how much. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you. Choose one extra effect:<br>
                         <ul>
                             <li>You gain the advantage: take +1 forward, or give +1 forward to another hunter</li>
                             <li>You inflict terrible harm (+1 harm)</li>
                             <li>You suffer less harm (-1 harm)</li>
                             <li>You force them where you want them</li>
                         </ul>`,
-            '12+': `Pick an ehanced effect:<br>
+            '12+': `<strong>Critical Success.</strong> You and whatever you're fighting each inflict harm on the other - GM determines how much. That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack's harm rating on you. Pick an ehanced effect:<br>
                         <ul>
                             <li>You completely hold the advantage. All hunters involved in the fight get +1 forward.</li>
                             <li>You suffer no harm at all.</li>
@@ -653,31 +653,31 @@ const infoArray = [
     }, 
     {'actUnderPressure' : 
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`The Keeper is going to give you:<br>
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> The Keeper is going to give you:<br>
                     <ul>
                         <li>A worse outcome</li>
                         <li>A hard choice</li>
                         <li>A price to pay</li>
                     </ul>`,
-            '10+':`You do what you set out to do.`,
-            '12+': `You may choose to either do what you wanted and something extra, or to do what you wanted to absolute perfection.`
+            '10+':`<strong>Success.</strong> You do what you set out to do.`,
+            '12+': `<strong>Critical Success.</strong> You may choose to either do what you wanted and something extra, or to do what you wanted to absolute perfection.`
         }
 
     },
     {'helpOut' : 
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`Your help grants them +1 to their roll, but you also expose yourself to trouble or danger.`,
-            '10+':`Your help grants them +1 to their roll.`,
-            '12+':`Your help lets them act as if they just rolled a 12, regardless of what they actually got.`
+            '1-6':`Y<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> Your help grants them +1 to their roll, but you also expose yourself to trouble or danger.`,
+            '10+':`<strong>Success.</strong> Your help grants them +1 to their roll.`,
+            '12+':`<strong>Critical Success.</strong> Your help lets them act as if they just rolled a 12, regardless of what they actually got.`
         }
 
     },
     {'investigateAMystery' : 
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`Ask the keeper one of the following questions:<br>
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> Ask the keeper one of the following questions:<br>
                 <ul>
                     <li>What happened here?</li>
                     <li>What sort of creature is it?</li>
@@ -687,7 +687,7 @@ const infoArray = [
                     <li>What was it going to do?</li>
                     <li>What is being concealed here?</li>
                 </ul>`,
-            '10+':`Ask the keeper two of the following questions:<br>
+            '10+':`<strong>Success.</strong> Ask the keeper two of the following questions:<br>
                 <ul>
                     <li>What happened here?</li>
                     <li>What sort of creature is it?</li>
@@ -711,32 +711,32 @@ const infoArray = [
     }, 
     {'manipulateSomeone' : 
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`They'll do it, but only if you do something for them right now to show you mean it. If you asked too much, they'll tell you what, if anything, it would take for them to do it.`,
-            '10+':`They'll do it for the reason you gave them. If you asked too much, they'll tell you the minimum it would take for them to do it (or if there's no way they'd do it).`,
-            '12+':`Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> They'll do it, but only if you do something for them right now to show you mean it. If you asked too much, they'll tell you what, if anything, it would take for them to do it.`,
+            '10+':`<strong>Success.</strong> They'll do it for the reason you gave them. If you asked too much, they'll tell you the minimum it would take for them to do it (or if there's no way they'd do it).`,
+            '12+':`<strong>Critical Success.</strong> Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
         }
 
     },
     {'protectSomeone' :
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`You protect them okay, but you'll suffer some or all of the harm they were going to get.`,
-            '10+':`Choose an extra:<br>
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> You protect them okay, but you'll suffer some or all of the harm they were going to get.`,
+            '10+':`<strong>Success.</strong> Choose an extra:<br>
                 <ul>
                     <li>You suffer little harm (-1 harm).</li>
                     <li>All impending danger is now focused on you.</li>
                     <li>You inflict harm on the enemy.</li>
                     <li>You hold the enemy back.</li>
                 </ul>`,
-            '12+':`Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
+            '12+':`<strong>Critical Success.</strong> Not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).`
         }
         
     },
     {'readABadSituation' :
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`Ask the keeper one of the following questions:<br>
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> Ask the keeper one of the following questions:<br>
                 <ul>
                     <li>What's my best way in?</li>
                     <li>What's my best way out?</li>
@@ -745,7 +745,7 @@ const infoArray = [
                     <li>What's most vulnerable to me?</li>
                     <li>What's the best way to protect the victims?</li>
                 </ul>`,
-            '10+':`Ask the keeper three of the following questions:<br>
+            '10+':`<strong>Success.</strong> Ask the keeper three of the following questions:<br>
                 <ul>
                     <li>What's my best way in?</li>
                     <li>What's my best way out?</li>
@@ -754,7 +754,7 @@ const infoArray = [
                     <li>What's most vulnerable to me?</li>
                     <li>What's the best way to protect the victims?</li>
                 </ul>`,
-            '12+':`You may ask the keeper any question you want about the mystery, including the following:<br>
+            '12+':`<strong>Critical Success.</strong> You may ask the keeper any question you want about the mystery, including the following:<br>
             <ul>
                 <li>What's my best way in?</li>
                 <li>What's my best way out?</li>
@@ -767,8 +767,8 @@ const infoArray = [
     },
     {'useMagic' :
         {
-            '1-6':`You fail. You have gained an experience point.`,
-            '7+':`It works imperfectly: choose your effect and a glitch. The keeper will decide what effect the the glitch has. Choose your effect:<br>
+            '1-6':`<strong>Total Failure.</strong> You have gained an experience point.`,
+            '7+':`<strong>Mixed Success.</strong> It works imperfectly: choose your effect and a glitch. The keeper will decide what effect the the glitch has. Choose your effect:<br>
                 <ul>
                     <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
                     <li>Enchant a weapon. It gets +1 harm and +magic.</li>
@@ -789,7 +789,7 @@ const infoArray = [
                     <li>The magic draws immediate, unwelcome attention.</li>
                     <li>It has a problematic side effect.</li>
                 </ul>`,
-            '10+':`The magic works without issues: choose your effect:<br>
+            '10+':`<strong>Success.</strong> The magic works without issues: choose your effect:<br>
                 <ul>
                     <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
                     <li>Enchant a weapon. It gets +1 harm and +magic.</li>
@@ -802,7 +802,7 @@ const infoArray = [
                     <li>Observe another place or time.</li>
                     <li>Heal 1 harm from an injury, or cure a disease, or neutralize a poison.</li>
                 </ul>`,
-            '12+':`The Keeper will offer you some added benefit. Choose your effect:<br>
+            '12+':`<strong>Critical Success.</strong> The Keeper will offer you some added benefit. Choose your effect:<br>
                 <ul>
                     <li>Inflict harm (1-harm ignore-armour magic obvious).</li>
                     <li>Enchant a weapon. It gets +1 harm and +magic.</li>

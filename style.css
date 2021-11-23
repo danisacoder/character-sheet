@@ -1,16 +1,18 @@
 body {
     margin: 0;
+    padding: 0;
+    position: relative;
 }
 
 h1 {
     margin: 0;
 }
 
-header {
+/* header {
     text-align: center;
-    border: 1px solid red;
     grid-area: header;
-}
+
+} */
 
 nav ul {
     display: flex;
@@ -25,7 +27,17 @@ nav li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 .6rem;
+    padding: 0 1rem;
+    margin: 0;
+    /* border: 1px solid red; */
+    background: black;
+    color: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+
 }
 
 .square {
@@ -54,6 +66,8 @@ nav li {
  }
 
 .grid-container {
+    position: relative;
+    top: 5em;
     border: 1px solid darkblue;
     margin: 10px 10px 10px;
     padding: 10px;
