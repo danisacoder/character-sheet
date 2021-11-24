@@ -3,11 +3,17 @@
 const harmBar = document.getElementById('harm-bar')
 const harmStatusText = document.getElementById('harm-status-text')
 const harmText = document.getElementById('harm-text')
+const characterNameText = document.querySelector('.character-name-text')
+
+function renderCharacterName() {
+    characterNameText.innerHTML = characterName 
+}
 
 let harmBarArray = []
 let currentHarmArray = [4]
+let characterName = 'Character Name_'
 
-let hunterType = 'The Monstrous'
+let hunterType = 'The Montrous'
 
 // Display number of harm out of 8 - need an additional emoji here
 
@@ -945,6 +951,7 @@ function renderAll() {
     renderUndoButton()
     renderInfoArray()
     renderMoves()
+    renderCharacterName()
     
 }
 
