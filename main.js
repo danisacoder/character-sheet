@@ -3,15 +3,15 @@
 const harmBar = document.getElementById('harm-bar')
 const harmStatusText = document.getElementById('harm-status-text')
 const harmText = document.getElementById('harm-text')
-const characterNameText = document.querySelector('.character-name-text')
+// const characterNameText = document.getElementById('name-section')
 
-function renderCharacterName() {
-    characterNameText.innerHTML = characterName 
-}
+// function renderCharacterName() {
+//     characterNameText.innerHTML = characterName 
+// }
 
 let harmBarArray = []
 let currentHarmArray = [4]
-let characterName = 'Character Name_'
+
 
 let hunterType = 'The Montrous'
 
@@ -265,6 +265,7 @@ let coolArray = [1]
 let sharpArray = [1]
 let toughArray = [0]
 let weirdArray = [3]
+let characterName = 'Character Name_'
 
 // ratingsArray = []
 
@@ -273,23 +274,57 @@ const coolText = document.getElementById('cool-section')
 const sharpText = document.getElementById('sharp-section')
 const toughText = document.getElementById('tough-section')
 const weirdText = document.getElementById('weird-section')
+const characterNameText = document.getElementById('name-section')
 
 
-const editableText = document.querySelectorAll(".editable-text")
+let editableTextNodeList = document.querySelectorAll(".editable-text")
+// let editableTextNodeList = document.querySelectorAll("span")
+// let spans = document.getElementById('charm-section').childNodes
 
-console.log(charmText)
+console.log(editableTextNodeList)
 
-// Show the ratings on the page
+// console.log(spans) 
 
-function renderRatingsText() {
+function renderEditableText() {
 
     charmText.innerHTML = `Charm: <span id="charm">${charmArray[0]}</span>`
     coolText.innerHTML = `Cool: <span id="cool">${coolArray[0]}</span>`
     sharpText.innerHTML = `Sharp: <span id="sharp">${sharpArray[0]}</span>`
-    toughText.innerHTML = `Tough: <span id="tough">${toughArray[0]}</span>S`
+    toughText.innerHTML = `Tough: <span id="tough">${toughArray[0]}</span>`
     weirdText.innerHTML = `Weird: <span id="weird">${weirdArray[0]}</span>`
-    
+    characterNameText.innerHTML = `<span id="name">${characterName}</span>`
+
 }
+
+function editableText() {
+    for (let i=0; i<editableTextNodeList.length; i++) {
+        editableTextNodeList[i].addEventListener("dblclick", function(){
+            console.log(editableTextNodeList[i])
+            console.log(editableTextNodeList[i].childNodes)
+            console.log(editableTextNodeList[i].childNodes.nodeNames)
+            // console.log(editableTextNodeList[i].childNodes[1].id) 
+            // set a variable for the id of the clicked element
+            // let clickedSection = editableTextNodeList[i].childNodes[1].id
+            
+            // replace the 
+
+        })
+    }
+
+}
+
+editableText()
+
+// listenForClicks()
+// Show the ratings on the page
+
+// editableTextNodeList.forEach(item => {
+//     item.addEventListener('click', event => {
+//         console.log('hello')
+//     })
+// })
+
+
 
 // Note to self - this does correctly identify the clicked item using the querySelectorAll approach
 
@@ -303,56 +338,59 @@ function renderRatingsText() {
 
 // findClickedEditableText() 
 
-charmText.addEventListener('dblclick', function() {
-        // identify the clicked text
-        let ratingSpan = document.getElementById('charm')
-        // blank the span out
-        ratingSpan.innerHTML = ''
-        // put in an input field with the rating number already in it and selected
-        let input = document.createElement('input')
-        let startValue = document.createTextNode(`${charmArray[0]}`)
-        document.getElementsByTagName("input")[0].setAttribute("id", "charm-editable-text")
-        document.getElementsByTagName("input")[0].setAttribute("type", "text")
-        document.getElementsByTagName("input")[0].setAttribute("size", "1")
-        document.getElementsByTagName("input")[0].setAttribute("value", `${charmArray[0]}`)
-        charmText.appendChild(input)
+// editableTextNodeList.addEventListener('dblclick', function() {
 
-        console.log(charmText)
+    // console.log('hello')
 
-        // charmText.innerHTML = `Charm:<input type="text" id="charm-editable-text" size="1" value="${charmArray[0]}"></input></h3>`
+        // // identify the clicked text
+        // let ratingSpan = document.getElementById('charm')
+        // // blank the span out
+        // ratingSpan.innerHTML = ''
+        // // put in an input field with the rating number already in it and selected
+        // let input = document.createElement('input')
+        // let startValue = document.createTextNode(`${charmArray[0]}`)
+        // document.getElementsByTagName("input")[0].setAttribute("id", "charm-editable-text")
+        // document.getElementsByTagName("input")[0].setAttribute("type", "text")
+        // document.getElementsByTagName("input")[0].setAttribute("size", "1")
+        // document.getElementsByTagName("input")[0].setAttribute("value", `${charmArray[0]}`)
+        // charmText.appendChild(input) 
 
-        // define a variable for this new class
-        let charmEventText = document.getElementById('charm-editable-text')
-        // put focus inside the text box
-        charmEventText.focus()
-        // select the text in the box so you can immediately start typing
-        charmEventText.select()
+        // console.log(charmText) 
 
-        function renderRating() {
+        // // define a variable for this new class
+        // let charmEventText = document.getElementById('charm-editable-text')
 
-            // convert the string values to numbers
-            let results = parseInt(charmEventText.value, 10) 
-            // if it's the same as before, do nothing
-            if (results === charmArray[0]) {} 
-            else {
-            // save the entered number into the array
-            charmArray.unshift(results)
-            // push the changes to the event log with identifier 10
-            eventLogArray.unshift([10,`Ratings: Charm adjusted from ${charmArray[1]} to ${charmArray[0]}`])
-            console.log(charmArray)
-            // render the new number as h3
-            renderAll() 
-            }
-        }
-        // if the user deselects the input box, save it to the new array
-        charmEventText.addEventListener('blur', function() {
-            renderRating()
-        })
+        // console.log(charmEventText)
+        // // put focus inside the text box
+        // charmEventText.focus()
+        // // select the text in the box so you can immediately start typing
+        // charmEventText.select()
+
+        // function renderRating() {
+
+        //     // convert the string values to numbers
+        //     let results = parseInt(charmEventText.value, 10) 
+        //     // if it's the same as before, do nothing
+        //     if (results === charmArray[0]) {} 
+        //     else {
+        //     // save the entered number into the array
+        //     charmArray.unshift(results)
+        //     // push the changes to the event log with identifier 10
+        //     eventLogArray.unshift([10,`Ratings: Charm adjusted from ${charmArray[1]} to ${charmArray[0]}`])
+        //     console.log(charmArray)
+        //     // render the new number as h3
+        //     renderAll() 
+        //     }
+        // }
+        // // if the user deselects the input box, save it to the new array
+        // charmEventText.addEventListener('blur', function() {
+        //     renderRating()
+        // })
         // detect if the user presses enter while in the text box 
         // if charmEventText.addEventListener('keydown', (e) {
             // renderRating()
         // })
-})
+// })
 
 
 
@@ -483,7 +521,7 @@ function renderEventLog() {
             eventLogText.innerHTML += `${eventLogArray[i][1]}<br>`
         }
     }
-    console.log(eventLogArray)
+    // console.log(eventLogArray)
 }
 
 
@@ -939,7 +977,7 @@ function renderAll() {
     renderBasicRoll()
     renderEventLog()
     renderHarmText()
-    renderRatingsText()
+    renderEditableText()
     renderExperienceText()
     renderLuckText()
     renderHarmBar()
@@ -951,7 +989,7 @@ function renderAll() {
     renderUndoButton()
     renderInfoArray()
     renderMoves()
-    renderCharacterName()
+    // renderCharacterName()
     
 }
 
