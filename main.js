@@ -265,7 +265,7 @@ let coolArray = [1]
 let sharpArray = [1]
 let toughArray = [0]
 let weirdArray = [3]
-let characterName = 'Character Name_'
+let nameArray = ['Arden']
 
 // ratingsArray = []
 
@@ -292,21 +292,51 @@ function renderEditableText() {
     sharpText.innerHTML = `Sharp: <span id="sharp">${sharpArray[0]}</span>`
     toughText.innerHTML = `Tough: <span id="tough">${toughArray[0]}</span>`
     weirdText.innerHTML = `Weird: <span id="weird">${weirdArray[0]}</span>`
-    characterNameText.innerHTML = `<span id="name">${characterName}</span>`
+    characterNameText.innerHTML = `Name: <span id="name">${nameArray}</span>`
 
 }
 
 function editableText() {
     for (let i=0; i<editableTextNodeList.length; i++) {
         editableTextNodeList[i].addEventListener("dblclick", function(){
-            console.log(editableTextNodeList[i])
-            console.log(editableTextNodeList[i].childNodes)
-            console.log(editableTextNodeList[i].childNodes.nodeNames)
-            // console.log(editableTextNodeList[i].childNodes[1].id) 
-            // set a variable for the id of the clicked element
-            // let clickedSection = editableTextNodeList[i].childNodes[1].id
+                // console.log(editableTextNodeList[i])
+                // console.log(editableTextNodeList[i].childNodes)
+                // console.log(editableTextNodeList[i].childNodes[1].id) 
+            // console.log(editableTextNodeList[i].querySelector("span").id)
+             // set a variable for the id of the clicked element
+            let clickedTextId = editableTextNodeList[i].querySelector("span").id
+            // let clickedParentNodeId = editableTextNodeList[i].id
+            let currentSpan = editableTextNodeList[i].querySelector("span")
+            let parentDiv = currentSpan.parentNode
+
+            // replace the text with an input
+
+            if (clickedTextId === 'name') {
+                currentArray = nameArray
+            } else if (clickedTextId === 'charm') {
+                currentArray = charmArray
+            } else if (clickedTextId === 'cool') {
+                currentArray = coolArray 
+            } else if (clickedTextId === 'sharp') {
+                currentArray = sharpArray
+            } else if (clickedTextId === 'tough') {
+                currentArray = toughArray
+            } else if (clickedTextId === 'weird') {
+                currentArray = weirdArray
+            }
+
+            let inputBox = document.createElement('input')
+            let defaultText = document.createTextNode('hello')
+            inputBox.appendChild(defaultText)
+            inputBox.id = 'input-box'
+            inputBox.type = 'text'
+            inputBox.size = '1'
+            inputBox.value = `${currentArray[0]}`
+
+            parentDiv.replaceChild(inputBox, currentSpan)
             
-            // replace the 
+            // document.getElementById(`${clickedParentNode}`).appendChild(inputBox)
+
 
         })
     }

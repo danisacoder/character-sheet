@@ -171,7 +171,7 @@ section {
 
 .editable-text {
     /* display: inline; */
-
+    user-select: none;
 }
 
 
@@ -216,3 +216,7 @@ section {
     font-style: ;
 } */ 
 
+#input-box {
+    /* background-color: pink; */
+    
+}
