@@ -13,7 +13,7 @@ let harmBarArray = []
 let currentHarmArray = [4]
 
 
-let hunterType = 'The Montrous'
+let hunterType = 'The Monstrous'
 
 // Display number of harm out of 8 - need an additional emoji here
 
@@ -299,10 +299,7 @@ function renderEditableText() {
 function editableText() {
     for (let i=0; i<editableTextNodeList.length; i++) {
         editableTextNodeList[i].addEventListener("dblclick", function(){
-                // console.log(editableTextNodeList[i])
-                // console.log(editableTextNodeList[i].childNodes)
-                // console.log(editableTextNodeList[i].childNodes[1].id) 
-            // console.log(editableTextNodeList[i].querySelector("span").id)
+
              // set a variable for the id of the clicked element
             let clickedTextId = editableTextNodeList[i].querySelector("span").id
             // let clickedParentNodeId = editableTextNodeList[i].id
@@ -344,6 +341,45 @@ function editableText() {
 }
 
 editableText()
+
+document.addEventListener('focus', function(){
+
+    // if (event.target.className === 'editable-text') {
+        console.log('hello')
+    // }
+})
+
+// let's edit the move set! 
+
+document.addEventListener("click", function(event) {
+
+    let eventTarget = event.target
+
+    console.log(eventTarget)
+
+    let pencilSpan = document.createElement('span')
+    
+    let pencilText = document.createTextNode(' hello')
+
+    pencilSpan.appendChild(pencilText)
+
+    // let targetParentNode = eventTarget.parentNode
+
+    eventTarget.appendChild(pencilSpan)
+
+    // pencilSpan.textContent = '✏' 
+
+    console.log(pencilSpan)
+
+    if (event.target.className === 'editable-text') {
+
+
+
+        console.log('✏')
+        
+        // if (event.target.parentDiv === ''
+    } 
+} )
 
 // listenForClicks()
 // Show the ratings on the page

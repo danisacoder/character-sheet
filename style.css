@@ -172,8 +172,12 @@ section {
 .editable-text {
     /* display: inline; */
     user-select: none;
+    
 }
 
+.editable-text:hover {
+    color: gray;
+}
 
 /* Making the event log text */
 
@@ -220,3 +224,4 @@ section {
     /* background-color: pink; */
     
 }
+
